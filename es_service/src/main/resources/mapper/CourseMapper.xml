@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.CourseMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.Course">
+    <id column="COURSE_NO" jdbcType="VARCHAR" property="courseNo" />
+    <result column="COUSENO" jdbcType="INTEGER" property="couseno" />
+    <result column="COL_NO" jdbcType="VARCHAR" property="colNo" />
+    <result column="COURSE_NAME" jdbcType="VARCHAR" property="courseName" />
+    <result column="CREDIT" jdbcType="VARCHAR" property="credit" />
+    <result column="WEEKTIME" jdbcType="VARCHAR" property="weektime" />
+    <result column="TOTALTIME" jdbcType="VARCHAR" property="totaltime" />
+    <result column="DES" jdbcType="VARCHAR" property="des" />
+    <result column="SPECIALTY" jdbcType="VARCHAR" property="specialty" />
+    <result column="CLASSNO" jdbcType="VARCHAR" property="classno" />
+    <result column="GRADE" jdbcType="VARCHAR" property="grade" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COURSE_NO, COUSENO, COL_NO, COURSE_NAME, CREDIT, WEEKTIME, TOTALTIME, DES, SPECIALTY, 
+    CLASSNO, GRADE
+  </sql>
+  
+<select id="getCourseByCondition" resultType="map" parameterType="org.es.service.manager.courseschedule.CourseQueryCondition">
+ 	SELECT 
+  	c.*,ct.TYPE_NAME,co.COL_NAME,S.SPE_NAME,CLA.CLASS_NO
+  	FROM course c LEFT JOIN course_type ct ON c.COUSENO=ct.COUSENO 
+  	LEFT JOIN COLLEGE co ON co.COL_NO = c.COL_NO 
+  	LEFT JOIN SPECIALTY S ON S.SPE_NO = C.SPECIALTY 
+  	LEFT JOIN classes CLA ON CLA.NO = C.CLASSNO
+	where 1=1
+  	<if test="college!=null">
+  		AND c.col_no = #{college}
+  	</if>
+  	<if test="specialty!=null">
+  		AND c.specialty = #{specialty}
+  	</if>
+  	<if test="grade!=null">
+  		AND c.grade = #{grade}
+  	</if>
+  	<if test="classno!=null">
+  		AND c.classno = #{classno}
+  	</if>
+  	GROUP BY c.COURSE_NO
+  </select>
+  <select id="selectByExample" parameterType="org.es.model.CourseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from course
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where COURSE_NO = #{courseNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from course
+    where COURSE_NO = #{courseNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.CourseExample">
+    delete from course
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.Course">
+    insert into course (COURSE_NO, COUSENO, COL_NO, 
+      COURSE_NAME, CREDIT, WEEKTIME, 
+      TOTALTIME, DES, SPECIALTY, 
+      CLASSNO, GRADE)
+    values (#{courseNo,jdbcType=VARCHAR}, #{couseno,jdbcType=INTEGER}, #{colNo,jdbcType=VARCHAR}, 
+      #{courseName,jdbcType=VARCHAR}, #{credit,jdbcType=VARCHAR}, #{weektime,jdbcType=VARCHAR}, 
+      #{totaltime,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
+      #{classno,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.Course">
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseNo != null">
+        COURSE_NO,
+      </if>
+      <if test="couseno != null">
+        COUSENO,
+      </if>
+      <if test="colNo != null">
+        COL_NO,
+      </if>
+      <if test="courseName != null">
+        COURSE_NAME,
+      </if>
+      <if test="credit != null">
+        CREDIT,
+      </if>
+      <if test="weektime != null">
+        WEEKTIME,
+      </if>
+      <if test="totaltime != null">
+        TOTALTIME,
+      </if>
+      <if test="des != null">
+        DES,
+      </if>
+      <if test="specialty != null">
+        SPECIALTY,
+      </if>
+      <if test="classno != null">
+        CLASSNO,
+      </if>
+      <if test="grade != null">
+        GRADE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseNo != null">
+        #{courseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="couseno != null">
+        #{couseno,jdbcType=INTEGER},
+      </if>
+      <if test="colNo != null">
+        #{colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null">
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="weektime != null">
+        #{weektime,jdbcType=VARCHAR},
+      </if>
+      <if test="totaltime != null">
+        #{totaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="classno != null">
+        #{classno,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.CourseExample" resultType="java.lang.Long">
+    select count(*) from course
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update course
+    <set>
+      <if test="record.courseNo != null">
+        COURSE_NO = #{record.courseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.couseno != null">
+        COUSENO = #{record.couseno,jdbcType=INTEGER},
+      </if>
+      <if test="record.colNo != null">
+        COL_NO = #{record.colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseName != null">
+        COURSE_NAME = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.credit != null">
+        CREDIT = #{record.credit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weektime != null">
+        WEEKTIME = #{record.weektime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totaltime != null">
+        TOTALTIME = #{record.totaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.des != null">
+        DES = #{record.des,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialty != null">
+        SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classno != null">
+        CLASSNO = #{record.classno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null">
+        GRADE = #{record.grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update course
+    set COURSE_NO = #{record.courseNo,jdbcType=VARCHAR},
+      COUSENO = #{record.couseno,jdbcType=INTEGER},
+      COL_NO = #{record.colNo,jdbcType=VARCHAR},
+      COURSE_NAME = #{record.courseName,jdbcType=VARCHAR},
+      CREDIT = #{record.credit,jdbcType=VARCHAR},
+      WEEKTIME = #{record.weektime,jdbcType=VARCHAR},
+      TOTALTIME = #{record.totaltime,jdbcType=VARCHAR},
+      DES = #{record.des,jdbcType=VARCHAR},
+      SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+      CLASSNO = #{record.classno,jdbcType=VARCHAR},
+      GRADE = #{record.grade,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.Course">
+    update course
+    <set>
+      <if test="couseno != null">
+        COUSENO = #{couseno,jdbcType=INTEGER},
+      </if>
+      <if test="colNo != null">
+        COL_NO = #{colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="courseName != null">
+        COURSE_NAME = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null">
+        CREDIT = #{credit,jdbcType=VARCHAR},
+      </if>
+      <if test="weektime != null">
+        WEEKTIME = #{weektime,jdbcType=VARCHAR},
+      </if>
+      <if test="totaltime != null">
+        TOTALTIME = #{totaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        DES = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="classno != null">
+        CLASSNO = #{classno,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        GRADE = #{grade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COURSE_NO = #{courseNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.Course">
+    update course
+    set COUSENO = #{couseno,jdbcType=INTEGER},
+      COL_NO = #{colNo,jdbcType=VARCHAR},
+      COURSE_NAME = #{courseName,jdbcType=VARCHAR},
+      CREDIT = #{credit,jdbcType=VARCHAR},
+      WEEKTIME = #{weektime,jdbcType=VARCHAR},
+      TOTALTIME = #{totaltime,jdbcType=VARCHAR},
+      DES = #{des,jdbcType=VARCHAR},
+      SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      CLASSNO = #{classno,jdbcType=VARCHAR},
+      GRADE = #{grade,jdbcType=VARCHAR}
+    where COURSE_NO = #{courseNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

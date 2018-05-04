@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.ClassesMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.Classes">
+    <id column="CLASS_NO" jdbcType="VARCHAR" property="classNo" />
+    <result column="SPE_NO" jdbcType="VARCHAR" property="speNo" />
+    <result column="SPECIALTY" jdbcType="VARCHAR" property="specialty" />
+    <result column="BUILDTIME" jdbcType="TIMESTAMP" property="buildtime" />
+    <result column="STUCOUNT" jdbcType="INTEGER" property="stucount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CLASS_NO, SPE_NO, SPECIALTY, BUILDTIME, STUCOUNT
+  </sql>
+  <select id="selectByExample" parameterType="org.es.model.ClassesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from classes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from classes
+    where CLASS_NO = #{classNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from classes
+    where CLASS_NO = #{classNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.ClassesExample">
+    delete from classes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.Classes">
+    insert into classes (CLASS_NO, SPE_NO, SPECIALTY, 
+      BUILDTIME, STUCOUNT)
+    values (#{classNo,jdbcType=VARCHAR}, #{speNo,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
+      #{buildtime,jdbcType=TIMESTAMP}, #{stucount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.Classes">
+    insert into classes
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="classNo != null">
+        CLASS_NO,
+      </if>
+      <if test="speNo != null">
+        SPE_NO,
+      </if>
+      <if test="specialty != null">
+        SPECIALTY,
+      </if>
+      <if test="buildtime != null">
+        BUILDTIME,
+      </if>
+      <if test="stucount != null">
+        STUCOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="classNo != null">
+        #{classNo,jdbcType=VARCHAR},
+      </if>
+      <if test="speNo != null">
+        #{speNo,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        #{buildtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stucount != null">
+        #{stucount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.ClassesExample" resultType="java.lang.Long">
+    select count(*) from classes
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update classes
+    <set>
+      <if test="record.classNo != null">
+        CLASS_NO = #{record.classNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speNo != null">
+        SPE_NO = #{record.speNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialty != null">
+        SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildtime != null">
+        BUILDTIME = #{record.buildtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.stucount != null">
+        STUCOUNT = #{record.stucount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update classes
+    set CLASS_NO = #{record.classNo,jdbcType=VARCHAR},
+      SPE_NO = #{record.speNo,jdbcType=VARCHAR},
+      SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+      BUILDTIME = #{record.buildtime,jdbcType=TIMESTAMP},
+      STUCOUNT = #{record.stucount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.Classes">
+    update classes
+    <set>
+      <if test="speNo != null">
+        SPE_NO = #{speNo,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        BUILDTIME = #{buildtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stucount != null">
+        STUCOUNT = #{stucount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where CLASS_NO = #{classNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.Classes">
+    update classes
+    set SPE_NO = #{speNo,jdbcType=VARCHAR},
+      SPECIALTY = #{specialty,jdbcType=VARCHAR},
+      BUILDTIME = #{buildtime,jdbcType=TIMESTAMP},
+      STUCOUNT = #{stucount,jdbcType=INTEGER}
+    where CLASS_NO = #{classNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

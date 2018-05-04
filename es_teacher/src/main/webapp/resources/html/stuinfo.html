@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>个人信息</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/student-main.css">
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/student-main.js"></script>
+</head>
+<body>
+<div class="page .container-fluid">
+<div class="top">
+	
+</div>
+<nav class="navbar navbar-default">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<li class="active"><a href="#">首页</a></li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">网上选课<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">学生选课</a></li>
+            <li><a href="#">体育课</a></li>
+            <li><a href="#">全校公共选修课</a></li>
+          </ul>
+      </li>
+       <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动报名<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">双学位报名</a></li>
+            <li><a href="#">四六级报名</a></li>
+          </ul>
+      </li>
+       <li>
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">教学质量评价<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"></a></li>
+          </ul>
+      </li>
+         <li> 
+         	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">信息修改 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">修改密码</a></li>
+            <li><a href="#">个人信息</a></li>
+          </ul>
+        </li>
+        <li >
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">信息查询 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">成绩查询</a></li>
+            <li><a href="#">课表查询</a></li>
+            <li><a href="#">考试安排查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">重修查询</a></li>
+            <li><a href="#">补考查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">四六级查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">转专业申请</a></li>
+            <li><a href="#">选课查询</a></li>
+          </ul>
+        </li>
+      </ul>
+     <p class="navbar-text navbar-right"><a href="#" class="navbar-link">退出</a></p>
+     <p class="navbar-text navbar-right">欢迎您！xx同学</p>
+    </div><!-- /.navbar-collapse -->
+</nav>
+<div class="content">
+	<form>
+		<table class="table table-bordered" width="100%" align="center">
+			<tr>
+				<td class="trbgtd><span id="lbxsgrxx_xh">学号：</span></td>
+				<td><span id="xh">141006117</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_xszh">学生证号：</span></td>
+				<td colSpan="2"><span id="lbl_xszh"></span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_sjlx">手机类型：</span></td>
+				<td width="165"><span id="lbl_TELLX"></span></td>
+				<td rowSpan="6"><img id="xszp" src="#" alt="照片" align="AbsMiddle" border="0" height="210" width="150"/><br>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_xm">姓名：</span></td>
+				<td><span id="xm">刘杰</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_pyfx">培养方向：</span></td>
+				<td colSpan="2"><span id="lbl_pyfx"></span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_sjhm">手机号码：</span></td>
+				<td width="165"><input name="TELNUMBER" type="text" id="TELNUMBER" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_cym">曾用名：</span></td>
+				<td>
+					<P></P>
+					<P><span id="lbl_zym"></span></P>
+				</td>
+				<td class="trbg1"><span id="lbxsgrxx_zyfx">专业方向：</span></td>
+				<td colSpan="2"><span id="lbl_zyfx"></span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_jtyb">家庭邮编：</span></td>
+				<td width="165"><input name="jtyb" type="text" id="jtyb" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_xb">性别：</span></td>
+				<td><span id="lbl_xb">男</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_rxrq">入学日期：</span></td>
+				<td colSpan="2"><span id="lbl_rxrq"></span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_jtdh">家庭电话：</span></td>
+				<td width="165"><input name="jtdh" type="text" id="jtdh" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_csrq">出生日期：</span></td>
+				<td><span id="lbl_csrq">19951213</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_byzx">毕业中学：</span></td>
+				<td colSpan="2"><span id="lbl_byzx"></span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_fqxm">父亲姓名：</span></td>
+				<td width="165"><input name="fqxm" type="text" id="fqxm" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_mz">民族：</span></td>
+				<td><span id="lbl_mz">汉族</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_ssh">宿舍号：</span></td>
+				<td colSpan="2"><span id="lbl_ssh"></span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_fqdw">父亲单位：</span></td>
+				<td width="165"><input name="fqdw" type="text" id="fqdw" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_jg">籍贯：</span></td>
+				<td><SPAN style="BORDER-BOTTOM: red 0px solid; BORDER-LEFT: red 0px solid; WIDTH: 18px; BORDER-TOP: red 0px solid; BORDER-RIGHT: red 0px solid">
+					</SPAN><span id="lbl_jg">河南省</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_dzyx">电子邮箱：</span></td>
+				<td colSpan="2"><span id="lbl_dzyxdz"></span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_fqdwyb">父亲单位邮编：</span></td>
+				<td width="165"><input name="fqdwyb" type="text" id="fqdwyb" /></td>
+				<td><input name="File1" id="File1" type="file" class="text_nor" onclick="return check();" size="8" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1" height="7"><span id="lbxsgrxx_zzmm">政治面貌：</span></td>
+				<td height="7"><span id="lbl_zzmm">共青团员</span></td>
+				<td class="trbg1" height="7"><span id="lbxsgrxx_lxdh">联系电话：</span></td>
+				<td height="7" colSpan="2"><input name="lxdh" type="text" value="18838914282" id="lxdh" /></td>
+				<td class="trbg1" height="7" width="183"><span id="lbxsgrxx_mqxm">母亲姓名：</span></td>
+				<td height="7" width="165"><input name="mqxm" type="text" id="mqxm" /></td>
+				<td height="7" align="center"></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_lydq">来源地区：</span></td>
+				<td><span id="lbl_lydq">河南省</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_yzbm">邮政编码：</span></td>
+				<td colSpan="2"><span id="lbl_yzbm">466300</span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_mqdw">母亲单位：</span></td>
+				<td width="165"><input name="mqdw" type="text" id="mqdw" /></td>
+				<td align="center"></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_lys">来源省：</span></td>
+				<td><span id="lbl_lys"></span></td>
+				<td class="trbg1"><span id="lbxsgrxx_zkzh">准考证号：</span></td>
+				<td colSpan="2"><span id="lbl_zkzh">14411417153060</span></td>
+				<td class="trbg1" width="183"><span id="lbxsgrxx_mqdwyb">母亲单位邮编：</span></td>
+				<td width="165"><input name="mqdwyb" type="text" id="mqdwyb" /></td>
+				<td align="center">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_csd">出生地：</span></td>
+				<td><span id="lbl_csd"></span></td>
+				<td class="trbg1"><span id="lbxsgrxx_sfzh">身份证号：</span></td>
+				<td colSpan="2"><span id="lbl_sfzh">412728199512134517</span></td>
+				<td class="trbg1" width="241" colSpan="2"><span id="lbxsgrxx_fqdwdhhsj">父亲单位电话或手机：</span></td>
+				<td><input name="fqdwdh" type="text" value="18838914282" id="fqdwdh" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_jkzk">健康状况：</span></td>
+				<td><span id="lbl_jkzk"></span></td>
+				<td class="trbg1"><span id="lbxsgrxx_xlcc">学历层次：</span></td>
+				<td colSpan="2"><span id="lbl_CC">本科</span></td>
+				<td class="trbg1" width="241" colSpan="2"><span id="lbxsgrxx_mqdwdhhsj">母亲单位电话或手机：</span></td>
+				<td><input name="mqdwdh" type="text" id="mqdwdh" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_xy">学院：</span></td>
+				<td><span id="lbl_xy">计算机学院</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_gatm">港澳台码：</span></td>
+				<td colSpan="2"><span id="lbl_gatm"></span></td>
+				<td class="trbg1" width="241" colSpan="2"><span id="lbxsgrxx_jtdz">家庭地址：</span></td>
+				<td><input name="jtdz" type="text" value="沈丘县槐店镇" id="jtdz" /></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_x">系：</span></td>
+				<td><span id="lbl_xi"></span></td>
+				<td class="trbg1"><span id="lbxsgrxx_bdh">报到号：</span></td>
+				<td colSpan="2"><span id="lbl_bdh"></span></td>
+				<td class="trbg1" width="241" colSpan="2"><span id="lbxsgrxx_jtszd">家庭所在地（/省/县）：</span></td>
+				<td><input name="jtszd" type="text" value="河南省周口市沈丘县" id="jtszd" /></td>
+			</tr>
+			<tr>
+				<td id="tdzymc" class="trbg1"><span id="lbxsgrxx_zymc">专业名称：</span></td>
+
+				<td><span id="lbl_zymc">计算机科学与技术</span></td>
+				<td id="tdsfgspydy" class="trbg1"><span id="lbxsgrxx_sfgspydy">是否高水平运动员：</span></td>
+				<td colSpan="2"><span id="lbl_SFGSPYDY"></span></td>
+				<td class="trbg1" vAlign="top" rowSpan="4" width="183"><span id="lbxsgrxx_bz">备注：</span></td>
+				<td rowSpan="4" colSpan="2"><span id="lbl_bz"></span></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_jxbmc">教学班名称：</span></td>
+				<td><span id="lbl_JXBMC"></span></td>
+				<td id="tdyydj" class="trbg1"><span id="lbxsgrxx_yydj">英语等级：</span></td>
+
+				<td colSpan="2"><span id="lbl_yydj"></span></td>
+			</tr>
+			<tr>
+				<td class="trbg1"><span id="lbxsgrxx_xzb">行政班：</span></td>
+				<td><span id="lbl_xzb">1410061</span></td>
+				<td id="tdyycj" class="trbg1"><span id="lbxsgrxx_yycj">英语成绩：</span></td>
+
+				<td colSpan="2"><span id="lbl_YYCJ"></span></td>
+			</tr>
+			<tr>
+				<td id="tdxz" class="trbg1"><span id="lbxsgrxx_xz">学制：</span></td>
+
+				<td><span id="lbl_xz">4</span></td>
+				<td id="tdljbym" class="trbg1"><span id="lbxsgrxx_ljbym">录检表页码：</span></td>
+
+				<td colSpan="2"><span id="lbl_LJBYM"></span></td>
+			</tr>
+			<tr>
+				<td class="trbg1" height="39"><span id="lbxsgrxx_xxnx">学习年限：</span></td>
+				<td height="39"><span id="lbl_xxnx">7</span></td>
+				<td class="trbg1" height="39"><span id="lbxsgrxx_tc">特长：</span></td>
+				<td height="39" colSpan="2"><span id="lbl_tc"></span></td>
+				<td class="trbg1" height="39" width="241" colSpan="2"></td>
+				<td height="39"></td>
+			</tr>
+			<tr>
+				<td class="trbg1" height="39"><span id="lbxsgrxx_xjzt">学籍状态：</span></td>
+				<td height="39"><span id="lbl_xjzt">有</span></td>
+				<td class="trbg1" height="39"><span id="lbxsgrxx_rdsj">入党(团)时间：</span></td>
+				<td height="39" colSpan="2"><span id="lbl_RDSJ"></span></td>
+				<td class="trbg1" height="39" width="241" colSpan="2"></td>
+				<td height="39"></td>
+			</tr>
+			<tr>
+				<td class="trbg1" height="39"><span id="lbxsgrxx_dqszj">当前所在级：</span></td>
+				<td height="39"><span id="lbl_dqszj">2014</span></td>
+				<td id="tdccqj" class="trbg1" height="39"><span id="lbxsgrxx_hczdz">火车终点站：</span></td>
+
+				<td height="39" colSpan="2"><input name="ccqj" type="text" value="沈丘县" id="ccqj" onclick="show(this);" /></td>
+				<td class="trbg1" height="39" width="241" colSpan="2"><span id="lbxsgrxx_zmr">证明人：</span></td>
+				<td height="39"></td>
+			</tr>
+			<tr id="trksh">
+				<td class="trbg1"><span id="lbxsgrxx_ksh">考生号：</span></td>
+				<td><span id="lbl_ksh">14411417153060</span></td>
+				<td class="trbg1"><span id="lbxsgrxx_xxxs">学习形式：</span></td>
+				<td colspan="2"><span id="lbl_xxxs"></span></td>
+				<td class="trbg1" width="241" colspan="2"><span id="lblxmpyo" style="Z-INDEX: 0">姓名拼音：</span></td>
+				<td><FONT face="宋体"><span id="lbl_xmpyo" style="Z-INDEX: 0"></span></FONT></td>
+			</tr>
+			<tr>
+				<td colspan="8">
+					<button class="btn btn-primary btn-lg" type="submit">提交</button>
+				</td>
+			</tr>					
+		</table>
+</form>
+</div>		
+</body>
+</html>

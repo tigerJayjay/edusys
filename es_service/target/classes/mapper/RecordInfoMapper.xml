@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.RecordInfoMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.RecordInfo">
+    <id column="RECORDNO" jdbcType="VARCHAR" property="recordno" />
+    <result column="STU_UNI_NO" jdbcType="VARCHAR" property="stuUniNo" />
+    <result column="SELECTIONKEY" jdbcType="VARCHAR" property="selectionkey" />
+    <result column="ADMISSIONNO" jdbcType="VARCHAR" property="admissionno" />
+    <result column="POSTCODE" jdbcType="INTEGER" property="postcode" />
+    <result column="IDNUMBER" jdbcType="VARCHAR" property="idnumber" />
+    <result column="EDU_GRADATION" jdbcType="VARCHAR" property="eduGradation" />
+    <result column="NATIVESPACE" jdbcType="VARCHAR" property="nativespace" />
+    <result column="NATION" jdbcType="VARCHAR" property="nation" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    RECORDNO, STU_UNI_NO, SELECTIONKEY, ADMISSIONNO, POSTCODE, IDNUMBER, EDU_GRADATION, 
+    NATIVESPACE, NATION
+  </sql>
+  <select id="selectByExample" parameterType="org.es.model.RecordInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from record_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from record_info
+    where RECORDNO = #{recordno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from record_info
+    where RECORDNO = #{recordno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.RecordInfoExample">
+    delete from record_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.RecordInfo">
+    insert into record_info (RECORDNO, STU_UNI_NO, SELECTIONKEY, 
+      ADMISSIONNO, POSTCODE, IDNUMBER, 
+      EDU_GRADATION, NATIVESPACE, NATION
+      )
+    values (#{recordno,jdbcType=VARCHAR}, #{stuUniNo,jdbcType=VARCHAR}, #{selectionkey,jdbcType=VARCHAR}, 
+      #{admissionno,jdbcType=VARCHAR}, #{postcode,jdbcType=INTEGER}, #{idnumber,jdbcType=VARCHAR}, 
+      #{eduGradation,jdbcType=VARCHAR}, #{nativespace,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.RecordInfo">
+    insert into record_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordno != null">
+        RECORDNO,
+      </if>
+      <if test="stuUniNo != null">
+        STU_UNI_NO,
+      </if>
+      <if test="selectionkey != null">
+        SELECTIONKEY,
+      </if>
+      <if test="admissionno != null">
+        ADMISSIONNO,
+      </if>
+      <if test="postcode != null">
+        POSTCODE,
+      </if>
+      <if test="idnumber != null">
+        IDNUMBER,
+      </if>
+      <if test="eduGradation != null">
+        EDU_GRADATION,
+      </if>
+      <if test="nativespace != null">
+        NATIVESPACE,
+      </if>
+      <if test="nation != null">
+        NATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordno != null">
+        #{recordno,jdbcType=VARCHAR},
+      </if>
+      <if test="stuUniNo != null">
+        #{stuUniNo,jdbcType=VARCHAR},
+      </if>
+      <if test="selectionkey != null">
+        #{selectionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionno != null">
+        #{admissionno,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=INTEGER},
+      </if>
+      <if test="idnumber != null">
+        #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="eduGradation != null">
+        #{eduGradation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativespace != null">
+        #{nativespace,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.RecordInfoExample" resultType="java.lang.Long">
+    select count(*) from record_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update record_info
+    <set>
+      <if test="record.recordno != null">
+        RECORDNO = #{record.recordno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuUniNo != null">
+        STU_UNI_NO = #{record.stuUniNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selectionkey != null">
+        SELECTIONKEY = #{record.selectionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.admissionno != null">
+        ADMISSIONNO = #{record.admissionno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcode != null">
+        POSTCODE = #{record.postcode,jdbcType=INTEGER},
+      </if>
+      <if test="record.idnumber != null">
+        IDNUMBER = #{record.idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eduGradation != null">
+        EDU_GRADATION = #{record.eduGradation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativespace != null">
+        NATIVESPACE = #{record.nativespace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null">
+        NATION = #{record.nation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update record_info
+    set RECORDNO = #{record.recordno,jdbcType=VARCHAR},
+      STU_UNI_NO = #{record.stuUniNo,jdbcType=VARCHAR},
+      SELECTIONKEY = #{record.selectionkey,jdbcType=VARCHAR},
+      ADMISSIONNO = #{record.admissionno,jdbcType=VARCHAR},
+      POSTCODE = #{record.postcode,jdbcType=INTEGER},
+      IDNUMBER = #{record.idnumber,jdbcType=VARCHAR},
+      EDU_GRADATION = #{record.eduGradation,jdbcType=VARCHAR},
+      NATIVESPACE = #{record.nativespace,jdbcType=VARCHAR},
+      NATION = #{record.nation,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.RecordInfo">
+    update record_info
+    <set>
+      <if test="stuUniNo != null">
+        STU_UNI_NO = #{stuUniNo,jdbcType=VARCHAR},
+      </if>
+      <if test="selectionkey != null">
+        SELECTIONKEY = #{selectionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="admissionno != null">
+        ADMISSIONNO = #{admissionno,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        POSTCODE = #{postcode,jdbcType=INTEGER},
+      </if>
+      <if test="idnumber != null">
+        IDNUMBER = #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="eduGradation != null">
+        EDU_GRADATION = #{eduGradation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativespace != null">
+        NATIVESPACE = #{nativespace,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null">
+        NATION = #{nation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RECORDNO = #{recordno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.RecordInfo">
+    update record_info
+    set STU_UNI_NO = #{stuUniNo,jdbcType=VARCHAR},
+      SELECTIONKEY = #{selectionkey,jdbcType=VARCHAR},
+      ADMISSIONNO = #{admissionno,jdbcType=VARCHAR},
+      POSTCODE = #{postcode,jdbcType=INTEGER},
+      IDNUMBER = #{idnumber,jdbcType=VARCHAR},
+      EDU_GRADATION = #{eduGradation,jdbcType=VARCHAR},
+      NATIVESPACE = #{nativespace,jdbcType=VARCHAR},
+      NATION = #{nation,jdbcType=VARCHAR}
+    where RECORDNO = #{recordno,jdbcType=VARCHAR}
+  </update>
+</mapper>

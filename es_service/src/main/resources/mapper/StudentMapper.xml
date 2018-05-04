@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.Student">
+    <id column="SNO" jdbcType="VARCHAR" property="sno" />
+    <result column="CLASS_NO" jdbcType="VARCHAR" property="classNo" />
+    <result column="SNAME" jdbcType="VARCHAR" property="sname" />
+    <result column="ENTRANCE_TIME" jdbcType="VARCHAR" property="entranceTime" />
+    <result column="GRADE" jdbcType="INTEGER" property="grade" />
+    <result column="CLASSNAME" jdbcType="INTEGER" property="classname" />
+    <result column="COLLEGE" jdbcType="VARCHAR" property="college" />
+    <result column="GENDER" jdbcType="INTEGER" property="gender" />
+    <result column="BIRTHDATE" jdbcType="VARCHAR" property="birthdate" />
+    <result column="PHONENUMBER" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="EMERGENCY" jdbcType="VARCHAR" property="emergency" />
+    <result column="EMERGENCYPHONE" jdbcType="VARCHAR" property="emergencyphone" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Student_Query_Condition">
+  	<where>
+  	 	<if test="sno!=null">
+  	 		and sno = #{sno}
+  	 	</if>
+  	 	<if test="sname!=null">
+  	 		and sname=#{sname}
+  	 	</if>
+  	 	<if test="entranceTimeStart!=null">
+  	 		and entranceTime >= #{entranceTimeStart}
+  	 	</if>
+  	 	<if test="entranceTimeEnd!=null">
+  	 		and entranceTime <![CDATA[<=]]> #{entranceTimeEnd}
+  	 	</if>
+  	 	<if test="grade!=null">
+  	 		and grade = #{grade}
+  	 	</if>
+  	 	<if test="classname!=null">
+  	 		and classname = #{classname}
+  	 	</if>
+  	 	<if test="college!=null">
+  	 		and college = #{college}
+  	 	</if>
+  	 	<if test="gender!=null">
+  	 		and gender = #{gender}
+  	 	</if>
+  	 	<if test="birthdateStart!=null">
+  	 		and birthdate >= #{birthdateStart}
+  	 	</if>
+  	 	<if test="birthdateEnd!=null">
+  	 		and birthdate <![CDATA[<=]]> #{birthdateEnd}
+  	 	</if>
+  	 </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SNO, CLASS_NO, SNAME, ENTRANCE_TIME, GRADE, CLASSNAME, COLLEGE, GENDER, BIRTHDATE, 
+    PHONENUMBER, EMAIL, EMERGENCY, EMERGENCYPHONE
+  </sql>
+  <select id="selectByCondition" parameterType="org.es.service.manager.student.StudentQueryCondition" resultType="map">
+  	 select
+  	  <include refid="Base_Column_List" />
+  	 from student
+  	 <include refid="Student_Query_Condition"/>
+  </select>
+  <select id="selectCountByCondition" parameterType="org.es.service.manager.student.StudentQueryCondition" resultType="int">
+  		select count(1)
+  		from student
+  		<include refid="Student_Query_Condition"/>
+  </select>
+  <select id="selectByExample" parameterType="org.es.model.StudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where SNO = #{sno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from student
+    where SNO = #{sno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.StudentExample">
+    delete from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.Student">
+    insert into student (SNO, CLASS_NO, SNAME, 
+      ENTRANCE_TIME, GRADE, CLASSNAME, 
+      COLLEGE, GENDER, BIRTHDATE, 
+      PHONENUMBER, EMAIL, EMERGENCY, 
+      EMERGENCYPHONE)
+    values (#{sno,jdbcType=VARCHAR}, #{classNo,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{entranceTime,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, #{classname,jdbcType=INTEGER}, 
+      #{college,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{birthdate,jdbcType=TIMESTAMP}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{emergency,jdbcType=VARCHAR}, 
+      #{emergencyphone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sno != null">
+        SNO,
+      </if>
+      <if test="classNo != null">
+        CLASS_NO,
+      </if>
+      <if test="sname != null">
+        SNAME,
+      </if>
+      <if test="entranceTime != null">
+        ENTRANCE_TIME,
+      </if>
+      <if test="grade != null">
+        GRADE,
+      </if>
+      <if test="classname != null">
+        CLASSNAME,
+      </if>
+      <if test="college != null">
+        COLLEGE,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE,
+      </if>
+      <if test="phonenumber != null">
+        PHONENUMBER,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="emergency != null">
+        EMERGENCY,
+      </if>
+      <if test="emergencyphone != null">
+        EMERGENCYPHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sno != null">
+        #{sno,jdbcType=VARCHAR},
+      </if>
+      <if test="classNo != null">
+        #{classNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="entranceTime != null">
+        #{entranceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null">
+        #{classname,jdbcType=INTEGER},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthdate != null">
+        #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phonenumber != null">
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emergency != null">
+        #{emergency,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyphone != null">
+        #{emergencyphone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.StudentExample" resultType="java.lang.Long">
+    select count(*) from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update student
+    <set>
+      <if test="record.sno != null">
+        SNO = #{record.sno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classNo != null">
+        CLASS_NO = #{record.classNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null">
+        SNAME = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entranceTime != null">
+        ENTRANCE_TIME = #{record.entranceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null">
+        GRADE = #{record.grade,jdbcType=INTEGER},
+      </if>
+      <if test="record.classname != null">
+        CLASSNAME = #{record.classname,jdbcType=INTEGER},
+      </if>
+      <if test="record.college != null">
+        COLLEGE = #{record.college,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        GENDER = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthdate != null">
+        BIRTHDATE = #{record.birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.phonenumber != null">
+        PHONENUMBER = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergency != null">
+        EMERGENCY = #{record.emergency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emergencyphone != null">
+        EMERGENCYPHONE = #{record.emergencyphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update student
+    set SNO = #{record.sno,jdbcType=VARCHAR},
+      CLASS_NO = #{record.classNo,jdbcType=VARCHAR},
+      SNAME = #{record.sname,jdbcType=VARCHAR},
+      ENTRANCE_TIME = #{record.entranceTime,jdbcType=VARCHAR},
+      GRADE = #{record.grade,jdbcType=INTEGER},
+      CLASSNAME = #{record.classname,jdbcType=INTEGER},
+      COLLEGE = #{record.college,jdbcType=VARCHAR},
+      GENDER = #{record.gender,jdbcType=INTEGER},
+      BIRTHDATE = #{record.birthdate,jdbcType=TIMESTAMP},
+      PHONENUMBER = #{record.phonenumber,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      EMERGENCY = #{record.emergency,jdbcType=VARCHAR},
+      EMERGENCYPHONE = #{record.emergencyphone,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.Student">
+    update student
+    <set>
+      <if test="classNo != null">
+        CLASS_NO = #{classNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null">
+        SNAME = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="entranceTime != null">
+        ENTRANCE_TIME = #{entranceTime,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        GRADE = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null">
+        CLASSNAME = #{classname,jdbcType=INTEGER},
+      </if>
+      <if test="college != null">
+        COLLEGE = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE = #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phonenumber != null">
+        PHONENUMBER = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emergency != null">
+        EMERGENCY = #{emergency,jdbcType=VARCHAR},
+      </if>
+      <if test="emergencyphone != null">
+        EMERGENCYPHONE = #{emergencyphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SNO = #{sno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.Student">
+    update student
+    set CLASS_NO = #{classNo,jdbcType=VARCHAR},
+      SNAME = #{sname,jdbcType=VARCHAR},
+      ENTRANCE_TIME = #{entranceTime,jdbcType=VARCHAR},
+      GRADE = #{grade,jdbcType=INTEGER},
+      CLASSNAME = #{classname,jdbcType=INTEGER},
+      COLLEGE = #{college,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      BIRTHDATE = #{birthdate,jdbcType=TIMESTAMP},
+      PHONENUMBER = #{phonenumber,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      EMERGENCY = #{emergency,jdbcType=VARCHAR},
+      EMERGENCYPHONE = #{emergencyphone,jdbcType=VARCHAR}
+    where SNO = #{sno,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.BookMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.Book">
+    <id column="BOOK_NO" jdbcType="INTEGER" property="bookNo" />
+    <result column="BOOK_NAME" jdbcType="VARCHAR" property="bookName" />
+    <result column="PRESS" jdbcType="VARCHAR" property="press" />
+    <result column="AUTHOR" jdbcType="VARCHAR" property="author" />
+    <result column="PRICE" jdbcType="DOUBLE" property="price" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    BOOK_NO, BOOK_NAME, PRESS, AUTHOR, PRICE
+  </sql>
+  <sql id="Where_Condition">
+  	<where>
+  		<if test="bookNo!=null">
+  			and book_no = #{bookNo}
+  		</if>
+  		<if test="bookname!=null">
+  			and book_name = #{bookname}
+  		</if>
+  		<if test="press!=null">
+  			and press = #{press}
+  		</if>
+  	</where>
+  </sql>
+  <select id="selectBookByCondition" resultType="map" parameterType="org.es.service.manager.book.BookQueryCondition">
+      select book_no,book_name,press,author,price
+      from book
+      <include refid="Where_Condition"/>
+  </select>
+  <select id="selectByExample" parameterType="org.es.model.BookExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from book
+    where BOOK_NO = #{bookNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book
+    where BOOK_NO = #{bookNo,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.BookExample">
+    delete from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.Book">
+    insert into book (BOOK_NO, BOOK_NAME, PRESS, 
+      AUTHOR, PRICE)
+    values (#{bookNo,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{press,jdbcType=VARCHAR}, 
+      #{author,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.Book">
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookNo != null">
+        BOOK_NO,
+      </if>
+      <if test="bookName != null">
+        BOOK_NAME,
+      </if>
+      <if test="press != null">
+        PRESS,
+      </if>
+      <if test="author != null">
+        AUTHOR,
+      </if>
+      <if test="price != null">
+        PRICE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookNo != null">
+        #{bookNo,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="press != null">
+        #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.BookExample" resultType="java.lang.Long">
+    select count(*) from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update book
+    <set>
+      <if test="record.bookNo != null">
+        BOOK_NO = #{record.bookNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookName != null">
+        BOOK_NAME = #{record.bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.press != null">
+        PRESS = #{record.press,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null">
+        AUTHOR = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        PRICE = #{record.price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update book
+    set BOOK_NO = #{record.bookNo,jdbcType=INTEGER},
+      BOOK_NAME = #{record.bookName,jdbcType=VARCHAR},
+      PRESS = #{record.press,jdbcType=VARCHAR},
+      AUTHOR = #{record.author,jdbcType=VARCHAR},
+      PRICE = #{record.price,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.Book">
+    update book
+    <set>
+      <if test="bookName != null">
+        BOOK_NAME = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="press != null">
+        PRESS = #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        AUTHOR = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where BOOK_NO = #{bookNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.Book">
+    update book
+    set BOOK_NAME = #{bookName,jdbcType=VARCHAR},
+      PRESS = #{press,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=DOUBLE}
+    where BOOK_NO = #{bookNo,jdbcType=INTEGER}
+  </update>
+</mapper>

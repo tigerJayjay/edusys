@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.CollegeMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.College">
+    <id column="COL_NO" jdbcType="VARCHAR" property="colNo" />
+    <result column="COL_NAME" jdbcType="VARCHAR" property="colName" />
+    <result column="LEADER" jdbcType="VARCHAR" property="leader" />
+    <result column="BUILDTIME" jdbcType="TIMESTAMP" property="buildtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    COL_NO, COL_NAME, LEADER, BUILDTIME
+  </sql>
+  <select id="selectByExample" parameterType="org.es.model.CollegeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from college
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from college
+    where COL_NO = #{colNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from college
+    where COL_NO = #{colNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.CollegeExample">
+    delete from college
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.College">
+    insert into college (COL_NO, COL_NAME, LEADER, 
+      BUILDTIME)
+    values (#{colNo,jdbcType=VARCHAR}, #{colName,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
+      #{buildtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.College">
+    insert into college
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="colNo != null">
+        COL_NO,
+      </if>
+      <if test="colName != null">
+        COL_NAME,
+      </if>
+      <if test="leader != null">
+        LEADER,
+      </if>
+      <if test="buildtime != null">
+        BUILDTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="colNo != null">
+        #{colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="colName != null">
+        #{colName,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null">
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        #{buildtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.CollegeExample" resultType="java.lang.Long">
+    select count(*) from college
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update college
+    <set>
+      <if test="record.colNo != null">
+        COL_NO = #{record.colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colName != null">
+        COL_NAME = #{record.colName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null">
+        LEADER = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildtime != null">
+        BUILDTIME = #{record.buildtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update college
+    set COL_NO = #{record.colNo,jdbcType=VARCHAR},
+      COL_NAME = #{record.colName,jdbcType=VARCHAR},
+      LEADER = #{record.leader,jdbcType=VARCHAR},
+      BUILDTIME = #{record.buildtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.College">
+    update college
+    <set>
+      <if test="colName != null">
+        COL_NAME = #{colName,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null">
+        LEADER = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        BUILDTIME = #{buildtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where COL_NO = #{colNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.College">
+    update college
+    set COL_NAME = #{colName,jdbcType=VARCHAR},
+      LEADER = #{leader,jdbcType=VARCHAR},
+      BUILDTIME = #{buildtime,jdbcType=TIMESTAMP}
+    where COL_NO = #{colNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.AdminPeopleMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.AdminPeople">
+    <id column="JOB_NO" jdbcType="VARCHAR" property="jobNo" />
+    <result column="OFFICE_NO" jdbcType="VARCHAR" property="officeNo" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="GENDER" jdbcType="INTEGER" property="gender" />
+    <result column="BIRTHDATE" jdbcType="TIMESTAMP" property="birthdate" />
+    <result column="AGE" jdbcType="INTEGER" property="age" />
+    <result column="NATIVEPLACE" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="ENTRYTIME" jdbcType="TIMESTAMP" property="entrytime" />
+    <result column="MARITALSTATUS" jdbcType="INTEGER" property="maritalstatus" />
+    <result column="POSITIONS" jdbcType="VARCHAR" property="positions" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    JOB_NO, OFFICE_NO, NAME, GENDER, BIRTHDATE, AGE, NATIVEPLACE, ENTRYTIME, MARITALSTATUS, 
+    POSITIONS
+  </sql>
+  <select id="selectByExample" parameterType="org.es.model.AdminPeopleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin_people
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin_people
+    where JOB_NO = #{jobNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from admin_people
+    where JOB_NO = #{jobNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.AdminPeopleExample">
+    delete from admin_people
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.AdminPeople">
+    insert into admin_people (JOB_NO, OFFICE_NO, NAME, 
+      GENDER, BIRTHDATE, AGE, 
+      NATIVEPLACE, ENTRYTIME, MARITALSTATUS, 
+      POSITIONS)
+    values (#{jobNo,jdbcType=VARCHAR}, #{officeNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=INTEGER}, #{birthdate,jdbcType=TIMESTAMP}, #{age,jdbcType=INTEGER}, 
+      #{nativeplace,jdbcType=VARCHAR}, #{entrytime,jdbcType=TIMESTAMP}, #{maritalstatus,jdbcType=INTEGER}, 
+      #{positions,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.AdminPeople">
+    insert into admin_people
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobNo != null">
+        JOB_NO,
+      </if>
+      <if test="officeNo != null">
+        OFFICE_NO,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="nativeplace != null">
+        NATIVEPLACE,
+      </if>
+      <if test="entrytime != null">
+        ENTRYTIME,
+      </if>
+      <if test="maritalstatus != null">
+        MARITALSTATUS,
+      </if>
+      <if test="positions != null">
+        POSITIONS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobNo != null">
+        #{jobNo,jdbcType=VARCHAR},
+      </if>
+      <if test="officeNo != null">
+        #{officeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthdate != null">
+        #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="entrytime != null">
+        #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maritalstatus != null">
+        #{maritalstatus,jdbcType=INTEGER},
+      </if>
+      <if test="positions != null">
+        #{positions,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.AdminPeopleExample" resultType="java.lang.Long">
+    select count(*) from admin_people
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update admin_people
+    <set>
+      <if test="record.jobNo != null">
+        JOB_NO = #{record.jobNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.officeNo != null">
+        OFFICE_NO = #{record.officeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        GENDER = #{record.gender,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthdate != null">
+        BIRTHDATE = #{record.birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.age != null">
+        AGE = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.nativeplace != null">
+        NATIVEPLACE = #{record.nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entrytime != null">
+        ENTRYTIME = #{record.entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.maritalstatus != null">
+        MARITALSTATUS = #{record.maritalstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.positions != null">
+        POSITIONS = #{record.positions,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update admin_people
+    set JOB_NO = #{record.jobNo,jdbcType=VARCHAR},
+      OFFICE_NO = #{record.officeNo,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      GENDER = #{record.gender,jdbcType=INTEGER},
+      BIRTHDATE = #{record.birthdate,jdbcType=TIMESTAMP},
+      AGE = #{record.age,jdbcType=INTEGER},
+      NATIVEPLACE = #{record.nativeplace,jdbcType=VARCHAR},
+      ENTRYTIME = #{record.entrytime,jdbcType=TIMESTAMP},
+      MARITALSTATUS = #{record.maritalstatus,jdbcType=INTEGER},
+      POSITIONS = #{record.positions,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.AdminPeople">
+    update admin_people
+    <set>
+      <if test="officeNo != null">
+        OFFICE_NO = #{officeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE = #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        AGE = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="nativeplace != null">
+        NATIVEPLACE = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="entrytime != null">
+        ENTRYTIME = #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maritalstatus != null">
+        MARITALSTATUS = #{maritalstatus,jdbcType=INTEGER},
+      </if>
+      <if test="positions != null">
+        POSITIONS = #{positions,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where JOB_NO = #{jobNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.AdminPeople">
+    update admin_people
+    set OFFICE_NO = #{officeNo,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      BIRTHDATE = #{birthdate,jdbcType=TIMESTAMP},
+      AGE = #{age,jdbcType=INTEGER},
+      NATIVEPLACE = #{nativeplace,jdbcType=VARCHAR},
+      ENTRYTIME = #{entrytime,jdbcType=TIMESTAMP},
+      MARITALSTATUS = #{maritalstatus,jdbcType=INTEGER},
+      POSITIONS = #{positions,jdbcType=VARCHAR}
+    where JOB_NO = #{jobNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

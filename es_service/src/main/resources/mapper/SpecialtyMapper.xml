@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.SpecialtyMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.Specialty">
+    <id column="SPE_NO" jdbcType="VARCHAR" property="speNo" />
+    <result column="COL_NO" jdbcType="VARCHAR" property="colNo" />
+    <result column="SPE_NAME" jdbcType="VARCHAR" property="speName" />
+    <result column="STARTTIME" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="COLLEGE" jdbcType="VARCHAR" property="college" />
+    <result column="LEN_SCHOOL" jdbcType="INTEGER" property="lenSchool" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SPE_NO, COL_NO, SPE_NAME, STARTTIME, COLLEGE, LEN_SCHOOL
+  </sql>
+  <select id="selectByExample" parameterType="org.es.model.SpecialtyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from specialty
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from specialty
+    where SPE_NO = #{speNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from specialty
+    where SPE_NO = #{speNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.SpecialtyExample">
+    delete from specialty
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.Specialty">
+    insert into specialty (SPE_NO, COL_NO, SPE_NAME, 
+      STARTTIME, COLLEGE, LEN_SCHOOL
+      )
+    values (#{speNo,jdbcType=VARCHAR}, #{colNo,jdbcType=VARCHAR}, #{speName,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{college,jdbcType=VARCHAR}, #{lenSchool,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.Specialty">
+    insert into specialty
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="speNo != null">
+        SPE_NO,
+      </if>
+      <if test="colNo != null">
+        COL_NO,
+      </if>
+      <if test="speName != null">
+        SPE_NAME,
+      </if>
+      <if test="starttime != null">
+        STARTTIME,
+      </if>
+      <if test="college != null">
+        COLLEGE,
+      </if>
+      <if test="lenSchool != null">
+        LEN_SCHOOL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="speNo != null">
+        #{speNo,jdbcType=VARCHAR},
+      </if>
+      <if test="colNo != null">
+        #{colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="speName != null">
+        #{speName,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="college != null">
+        #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="lenSchool != null">
+        #{lenSchool,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.SpecialtyExample" resultType="java.lang.Long">
+    select count(*) from specialty
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update specialty
+    <set>
+      <if test="record.speNo != null">
+        SPE_NO = #{record.speNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colNo != null">
+        COL_NO = #{record.colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speName != null">
+        SPE_NAME = #{record.speName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null">
+        STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.college != null">
+        COLLEGE = #{record.college,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lenSchool != null">
+        LEN_SCHOOL = #{record.lenSchool,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update specialty
+    set SPE_NO = #{record.speNo,jdbcType=VARCHAR},
+      COL_NO = #{record.colNo,jdbcType=VARCHAR},
+      SPE_NAME = #{record.speName,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      COLLEGE = #{record.college,jdbcType=VARCHAR},
+      LEN_SCHOOL = #{record.lenSchool,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.Specialty">
+    update specialty
+    <set>
+      <if test="colNo != null">
+        COL_NO = #{colNo,jdbcType=VARCHAR},
+      </if>
+      <if test="speName != null">
+        SPE_NAME = #{speName,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="college != null">
+        COLLEGE = #{college,jdbcType=VARCHAR},
+      </if>
+      <if test="lenSchool != null">
+        LEN_SCHOOL = #{lenSchool,jdbcType=INTEGER},
+      </if>
+    </set>
+    where SPE_NO = #{speNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.Specialty">
+    update specialty
+    set COL_NO = #{colNo,jdbcType=VARCHAR},
+      SPE_NAME = #{speName,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      COLLEGE = #{college,jdbcType=VARCHAR},
+      LEN_SCHOOL = #{lenSchool,jdbcType=INTEGER}
+    where SPE_NO = #{speNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

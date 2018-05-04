@@ -1,0 +1,87 @@
+body
+{
+    font-family: Î¢ÈíÑÅºÚ,ËÎÌå;
+}
+/*À©Õ¹*/
+.icon-details
+{
+    background: url('../Images/view.png') no-repeat;
+}
+
+#divQuery
+{
+    padding: 5px 0px 0px 5px;
+    width: 726px;
+}
+#divAdd
+{
+	padding: 5px 0px 0px 5px;
+    width: 726px;
+}
+.editor-field-search
+{
+    width: 262px;
+    height: 43px;
+    float: left;
+}
+.editor-label-search
+{
+    width: 98px;
+    height: 43px;
+    float: left;
+}
+.editor-field-to
+{
+    width: 601px;
+    height: 43px;
+    float: left;
+}
+.editor-field-search select
+{
+    height: 20px;
+    width: 120px;
+    border: 1px solid #CCC;
+}
+.editor-field-search input
+{
+    height: 16px;
+    width: 120px;
+    border: 1px solid #CCC;
+}
+.editor-field-to input
+{
+    height: 16px;
+    width: 120px;
+    border: 1px solid #CCC;
+}
+.icon-excel {
+    background: url('../images/excelcss.jpg') no-repeat;
+}
+
+.input-textbox{border:#95b8e7 1px solid; height:18px; width:100px;}
+
+.xrows{ margin:0 auto; width:100%; height:30px; margin-top:10px; line-height:30px; overflow:hidden;zoom:1;}
+.xrows span{ display:block; float:left;}
+.xrows .left{ width:120px; text-align:left; margin-left:20px;}
+.xrows .right{ width:300px;line-height:34px;}
+.buhege,.buhege4{ display:none;}
+.textshu{ overflow:hidden;zoom:1;}
+.textshu a , .textshu a:visited ,.textshu a:hover{ margin-top:5px;}
+a.xxa,a:visited.xxa{border: 1px solid #b7d2ff;}
+.easyui-numberbox{ border:#95b8e7 1px solid;}
+
+#toolbar{ overflow:hidden;zoom:1;}
+#toolbar .easyui-linkbutton{ display:block; width:60px; height:30px; float:left;}
+
+#wBeizhu .line{ clear:both;  overflow:hidden;zoom:1;}
+#wBeizhu .editor-label{ width:60px; text-align:left; float:left; height:26px; padding-left:4px;}
+#wBeizhu .editor-field{ width:320px; text-align:left; float:left; height:26px; padding-top:4px; margin-right:16px;}
+#wBeizhu .blueline{ border-bottom:#95b8e7 1px solid; margin-bottom:10px; padding-bottom:10px;}
+#wBeizhu .height80{ height:80px; line-height:80px;}
+#wBeizhu .TextArea{ width:320px; height:60px;border:#95b8e7 1px solid;}
+#wBeizhu .editor-field input,.input-textbox{border:#95b8e7 1px solid; line-height:18px;}
+#wBeizhu .stupic{ position:absolute; top:40px; left:264px;}
+
+.textborder{border:#95b8e7 1px solid;}
+
+.bitian{ color:Red;}

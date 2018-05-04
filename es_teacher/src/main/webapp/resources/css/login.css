@@ -1,0 +1,39 @@
+div,td,tr,body,a{
+	padding: 0;
+	margin: 0;
+}
+.clearfix:after{
+	content: "";
+	height: 0;
+	display: block;
+	clear: both;
+	visibility: hidden;
+}
+.page{
+	width: 100%;
+	height: 1000px;
+	background:url(../images/bg01.png);
+	background-size:contain;
+}
+.top{
+	width: 100%;
+	height: 100px;
+	background:url(../images/top.png) 40% 15px no-repeat;
+	background-size:contain;
+}
+.center{
+	width: 100%;
+	margin: auto;
+	margin-top: 20px;
+	background: url(../images/bg02.png) no-repeat;
+}
+.center .righter{
+	width: 27%;
+	height: 500px;
+	float: right;
+	padding-top: 100px;
+	padding-left: 6%;
+	margin-right: 18%;
+	text-align: center;
+	background: rgba(255,255,255,0.5);
+}

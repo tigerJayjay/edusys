@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.ScheduleMapper">
+	<resultMap id="BaseResultMap" type="org.es.model.Schedule">
+		<id column="SCHE_NO" jdbcType="VARCHAR" property="scheNo" />
+		<result column="COURSE_NO" jdbcType="VARCHAR" property="courseNo" />
+		<result column="JOBNO" jdbcType="VARCHAR" property="jobno" />
+		<result column="PLACE" jdbcType="VARCHAR" property="place" />
+		<result column="START_WEEK" jdbcType="INTEGER" property="startWeek" />
+		<result column="END_WEEK" jdbcType="INTEGER" property="endWeek" />
+		<result column="CAPACITY" jdbcType="INTEGER" property="capacity" />
+		<result column="MARGIN" jdbcType="INTEGER" property="margin" />
+		<result column="YEARTIME" jdbcType="VARCHAR" property="yeartime" />
+		<result column="TERMTIME" jdbcType="INTEGER" property="termtime" />
+		<result column="GRADE" jdbcType="VARCHAR" property="grade" />
+		<result column="WEEKNO" jdbcType="INTEGER" property="weekno" />
+		<result column="JIE" jdbcType="VARCHAR" property="jie" />
+		<result column="COLLEGE" jdbcType="VARCHAR" property="college" />
+		<result column="SPECIALTY" jdbcType="VARCHAR" property="specialty" />
+		<result column="CLASSNO" jdbcType="VARCHAR" property="classno" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		SCHE_NO, COURSE_NO, JOBNO, PLACE, START_WEEK, END_WEEK, CAPACITY, MARGIN,
+		YEARTIME,
+		TERMTIME, GRADE, WEEKNO, JIE, COLLEGE, SPECIALTY, CLASSNO
+	</sql>
+	<sql id="Where_Condition">
+			<if test="classno!=null">
+				and f.classno = #{classno}
+			</if>
+			<if test="specialty!=null">
+				and f.specialty = #{specialty}
+			</if>
+			<if test="college!=null">
+				and f.college = #{college}
+			</if>
+			<if test="grade!=null">
+				and f.grade = #{grade}
+			</if>
+			<if test="yeartime!=null">
+				and f.yeartime = #{yeartime}
+			</if>
+			<if test="termtime!=null">
+				and f.termtime = #{termtime}
+			</if>
+			<if test="courseNo!=null">
+				and f.course_no = #{courseNo}
+			</if>
+	</sql>
+	<sql id="Where_Condition_Merge">
+			<if test="classno!=null">
+			 	and(f.classno=0 or f.classno = #{classno})
+			</if>
+			<if test="specialty!=null">
+			 	and(f.specialty=0 or f.specialty = #{specialty})
+			</if>
+			<if test="college!=null">
+				and (f.college=0 or f.college = #{college})
+			</if>
+			<if test="grade!=null">
+				and (f.grade=0 or f.grade = #{grade})
+			</if>
+	</sql>
+	<select id="getScheduleByConditionMerge" parameterType="org.es.model.Schedule"
+		resultType="map">
+		SELECT f.* FROM (
+		SELECT a.*,IFNULL(b.sche_no,0) mark FROM(SELECT s.SCHE_NO,
+		c.course_no,ifnull(s.classno,0) classno,ct.type_name,c.course_name,c.credit,c.weektime,c.totaltime,c.des,s.yeartime,s.termtime,ifnull(s.grade,0) grade,ifnull(s.college,0) college,ifnull(s.specialty,0) specialty
+		FROM SCHEDULE s,course c,course_type ct
+		WHERE s.course_no = c.course_no AND c.couseno = ct.couseno and s.yeartime = #{yeartime} and termtime = #{termtime}
+		GROUP BY
+		s.course_no,s.yeartime,s.termtime,s.grade,s.college,s.specialty,s.classno
+		) a
+		LEFT JOIN (SELECT sche_no FROM course_select_info d WHERE d.SNO=#{sno}) b ON b.sche_no = a.SCHE_NO
+		) f 
+		WHERE  1=1
+		<include refid="Where_Condition_Merge" />
+	</select>
+	<select id="getScheduleByConditionSpread" parameterType="org.es.model.Schedule"
+		resultType="map">
+		SELECT f.*,IFNULL(e.jobno,0) mark FROM(SELECT b.* FROM (
+		SELECT
+		s.SCHE_NO,c.course_no,s.jobno,ifnull(s.classno,0) classno,s.capacity,s.margin,t.tname,c.course_name,c.credit,
+		c.weektime,c.totaltime,c.des,s.yeartime,s.termtime,ifnull(s.grade,0) grade,ifnull(s.college,0) college,
+		ifnull(s.specialty,0) specialty,GROUP_CONCAT(CONCAT(CONCAT(start_week,CONCAT('-',end_week)),CONCAT(CONCAT(CONCAT('周
+		周',weekno),' '),CONCAT(jie,'节')))) timeandplace
+		FROM SCHEDULE s,course c,teacher t
+		WHERE s.course_no = c.course_no AND t.jobno = s.jobno 
+		 <if test="courseNo!=null">
+		 	AND s.COURSE_NO = #{courseNo} 
+		 </if>
+		 
+		 and s.yeartime = #{yeartime} and s.termtime = #{termtime}
+		GROUP BY
+		s.course_no,s.jobno,s.yeartime,s.termtime,s.grade,s.college,s.specialty,s.classno
+		) b
+		) f
+		LEFT JOIN (SELECT o.JOBNO FROM course_select_info m,SCHEDULE n,teacher o WHERE m.SCHE_NO = n.SCHE_NO AND
+			n.JOBNO = o.JOBNO AND m.SNO=#{sno}) e ON f.jobno = e.jobno
+		
+		
+		WHERE  1=1 
+		<if test="mark!=null">
+			and IFNULL(e.jobno,0)>0
+		</if>
+		<include refid="Where_Condition_Merge" />
+	</select>
+	<select id="getScheduleByCondition" parameterType="org.es.model.Schedule" resultType="map">
+		SELECT f.*,C.COURSE_NAME FROM
+		SCHEDULE f,COURSE C WHERE f.COURSE_NO = C.COURSE_NO
+		<include refid="Where_Condition"/>
+	</select>
+	<select id="selectByExample" parameterType="org.es.model.ScheduleExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from schedule
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from schedule
+		where SCHE_NO = #{scheNo,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from schedule
+		where SCHE_NO = #{scheNo,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="org.es.model.ScheduleExample">
+		delete from schedule
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="org.es.model.Schedule">
+		insert into schedule (SCHE_NO, COURSE_NO, JOBNO,
+		PLACE, START_WEEK, END_WEEK,
+		CAPACITY, MARGIN, YEARTIME,
+		TERMTIME, GRADE, WEEKNO,
+		JIE, COLLEGE, SPECIALTY,
+		CLASSNO)
+		values (#{scheNo,jdbcType=VARCHAR}, #{courseNo,jdbcType=VARCHAR},
+		#{jobno,jdbcType=VARCHAR},
+		#{place,jdbcType=VARCHAR}, #{startWeek,jdbcType=INTEGER}, #{endWeek,jdbcType=INTEGER},
+		#{capacity,jdbcType=INTEGER}, #{margin,jdbcType=INTEGER},
+		#{yeartime,jdbcType=VARCHAR},
+		#{termtime,jdbcType=INTEGER}, #{grade,jdbcType=VARCHAR}, #{weekno,jdbcType=INTEGER},
+		#{jie,jdbcType=VARCHAR}, #{college,jdbcType=VARCHAR},
+		#{specialty,jdbcType=VARCHAR},
+		#{classno,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="org.es.model.Schedule">
+		insert into schedule
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="scheNo != null">
+				SCHE_NO,
+			</if>
+			<if test="courseNo != null">
+				COURSE_NO,
+			</if>
+			<if test="jobno != null">
+				JOBNO,
+			</if>
+			<if test="place != null">
+				PLACE,
+			</if>
+			<if test="startWeek != null">
+				START_WEEK,
+			</if>
+			<if test="endWeek != null">
+				END_WEEK,
+			</if>
+			<if test="capacity != null">
+				CAPACITY,
+			</if>
+			<if test="margin != null">
+				MARGIN,
+			</if>
+			<if test="yeartime != null">
+				YEARTIME,
+			</if>
+			<if test="termtime != null">
+				TERMTIME,
+			</if>
+			<if test="grade != null">
+				GRADE,
+			</if>
+			<if test="weekno != null">
+				WEEKNO,
+			</if>
+			<if test="jie != null">
+				JIE,
+			</if>
+			<if test="college != null">
+				COLLEGE,
+			</if>
+			<if test="specialty != null">
+				SPECIALTY,
+			</if>
+			<if test="classno != null">
+				CLASSNO,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="scheNo != null">
+				#{scheNo,jdbcType=VARCHAR},
+			</if>
+			<if test="courseNo != null">
+				#{courseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="jobno != null">
+				#{jobno,jdbcType=VARCHAR},
+			</if>
+			<if test="place != null">
+				#{place,jdbcType=VARCHAR},
+			</if>
+			<if test="startWeek != null">
+				#{startWeek,jdbcType=INTEGER},
+			</if>
+			<if test="endWeek != null">
+				#{endWeek,jdbcType=INTEGER},
+			</if>
+			<if test="capacity != null">
+				#{capacity,jdbcType=INTEGER},
+			</if>
+			<if test="margin != null">
+				#{margin,jdbcType=INTEGER},
+			</if>
+			<if test="yeartime != null">
+				#{yeartime,jdbcType=VARCHAR},
+			</if>
+			<if test="termtime != null">
+				#{termtime,jdbcType=INTEGER},
+			</if>
+			<if test="grade != null">
+				#{grade,jdbcType=VARCHAR},
+			</if>
+			<if test="weekno != null">
+				#{weekno,jdbcType=INTEGER},
+			</if>
+			<if test="jie != null">
+				#{jie,jdbcType=VARCHAR},
+			</if>
+			<if test="college != null">
+				#{college,jdbcType=VARCHAR},
+			</if>
+			<if test="specialty != null">
+				#{specialty,jdbcType=VARCHAR},
+			</if>
+			<if test="classno != null">
+				#{classno,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="org.es.model.ScheduleExample"
+		resultType="java.lang.Long">
+		select count(*) from schedule
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update schedule
+		<set>
+			<if test="record.scheNo != null">
+				SCHE_NO = #{record.scheNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.courseNo != null">
+				COURSE_NO = #{record.courseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.jobno != null">
+				JOBNO = #{record.jobno,jdbcType=VARCHAR},
+			</if>
+			<if test="record.place != null">
+				PLACE = #{record.place,jdbcType=VARCHAR},
+			</if>
+			<if test="record.startWeek != null">
+				START_WEEK = #{record.startWeek,jdbcType=INTEGER},
+			</if>
+			<if test="record.endWeek != null">
+				END_WEEK = #{record.endWeek,jdbcType=INTEGER},
+			</if>
+			<if test="record.capacity != null">
+				CAPACITY = #{record.capacity,jdbcType=INTEGER},
+			</if>
+			<if test="record.margin != null">
+				MARGIN = #{record.margin,jdbcType=INTEGER},
+			</if>
+			<if test="record.yeartime != null">
+				YEARTIME = #{record.yeartime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.termtime != null">
+				TERMTIME = #{record.termtime,jdbcType=INTEGER},
+			</if>
+			<if test="record.grade != null">
+				GRADE = #{record.grade,jdbcType=VARCHAR},
+			</if>
+			<if test="record.weekno != null">
+				WEEKNO = #{record.weekno,jdbcType=INTEGER},
+			</if>
+			<if test="record.jie != null">
+				JIE = #{record.jie,jdbcType=VARCHAR},
+			</if>
+			<if test="record.college != null">
+				COLLEGE = #{record.college,jdbcType=VARCHAR},
+			</if>
+			<if test="record.specialty != null">
+				SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+			</if>
+			<if test="record.classno != null">
+				CLASSNO = #{record.classno,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update schedule
+		set SCHE_NO = #{record.scheNo,jdbcType=VARCHAR},
+		COURSE_NO = #{record.courseNo,jdbcType=VARCHAR},
+		JOBNO = #{record.jobno,jdbcType=VARCHAR},
+		PLACE = #{record.place,jdbcType=VARCHAR},
+		START_WEEK = #{record.startWeek,jdbcType=INTEGER},
+		END_WEEK = #{record.endWeek,jdbcType=INTEGER},
+		CAPACITY = #{record.capacity,jdbcType=INTEGER},
+		MARGIN = #{record.margin,jdbcType=INTEGER},
+		YEARTIME = #{record.yeartime,jdbcType=VARCHAR},
+		TERMTIME = #{record.termtime,jdbcType=INTEGER},
+		GRADE = #{record.grade,jdbcType=VARCHAR},
+		WEEKNO = #{record.weekno,jdbcType=INTEGER},
+		JIE = #{record.jie,jdbcType=VARCHAR},
+		COLLEGE = #{record.college,jdbcType=VARCHAR},
+		SPECIALTY = #{record.specialty,jdbcType=VARCHAR},
+		CLASSNO = #{record.classno,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="org.es.model.Schedule">
+		update schedule
+		<set>
+			<if test="courseNo != null">
+				COURSE_NO = #{courseNo,jdbcType=VARCHAR},
+			</if>
+			<if test="jobno != null">
+				JOBNO = #{jobno,jdbcType=VARCHAR},
+			</if>
+			<if test="place != null">
+				PLACE = #{place,jdbcType=VARCHAR},
+			</if>
+			<if test="startWeek != null">
+				START_WEEK = #{startWeek,jdbcType=INTEGER},
+			</if>
+			<if test="endWeek != null">
+				END_WEEK = #{endWeek,jdbcType=INTEGER},
+			</if>
+			<if test="capacity != null">
+				CAPACITY = #{capacity,jdbcType=INTEGER},
+			</if>
+			<if test="margin != null">
+				MARGIN = #{margin,jdbcType=INTEGER},
+			</if>
+			<if test="yeartime != null">
+				YEARTIME = #{yeartime,jdbcType=VARCHAR},
+			</if>
+			<if test="termtime != null">
+				TERMTIME = #{termtime,jdbcType=INTEGER},
+			</if>
+			<if test="grade != null">
+				GRADE = #{grade,jdbcType=VARCHAR},
+			</if>
+			<if test="weekno != null">
+				WEEKNO = #{weekno,jdbcType=INTEGER},
+			</if>
+			<if test="jie != null">
+				JIE = #{jie,jdbcType=VARCHAR},
+			</if>
+			<if test="college != null">
+				COLLEGE = #{college,jdbcType=VARCHAR},
+			</if>
+			<if test="specialty != null">
+				SPECIALTY = #{specialty,jdbcType=VARCHAR},
+			</if>
+			<if test="classno != null">
+				CLASSNO = #{classno,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where SCHE_NO = #{scheNo,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.es.model.Schedule">
+		update schedule
+		set COURSE_NO = #{courseNo,jdbcType=VARCHAR},
+		JOBNO = #{jobno,jdbcType=VARCHAR},
+		PLACE = #{place,jdbcType=VARCHAR},
+		START_WEEK = #{startWeek,jdbcType=INTEGER},
+		END_WEEK = #{endWeek,jdbcType=INTEGER},
+		CAPACITY = #{capacity,jdbcType=INTEGER},
+		MARGIN = #{margin,jdbcType=INTEGER},
+		YEARTIME = #{yeartime,jdbcType=VARCHAR},
+		TERMTIME = #{termtime,jdbcType=INTEGER},
+		GRADE = #{grade,jdbcType=VARCHAR},
+		WEEKNO = #{weekno,jdbcType=INTEGER},
+		JIE = #{jie,jdbcType=VARCHAR},
+		COLLEGE = #{college,jdbcType=VARCHAR},
+		SPECIALTY = #{specialty,jdbcType=VARCHAR},
+		CLASSNO = #{classno,jdbcType=VARCHAR}
+		where SCHE_NO = #{scheNo,jdbcType=VARCHAR}
+	</update>
+</mapper>

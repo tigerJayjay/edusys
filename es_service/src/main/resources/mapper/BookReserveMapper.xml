@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.BookReserveMapper">
+	<resultMap id="BaseResultMap" type="org.es.model.BookReserve">
+		<id column="NO" jdbcType="INTEGER" property="no" />
+		<result column="SNO" jdbcType="VARCHAR" property="sno" />
+		<result column="BOOK_NO" jdbcType="INTEGER" property="bookNo" />
+		<result column="TERMTIME" jdbcType="INTEGER" property="termtime" />
+		<result column="YEARTIME" jdbcType="VARCHAR" property="yeartime" />
+		<result column="PAYSTATUS" jdbcType="INTEGER" property="paystatus" />
+		<result column="PAYABLE" jdbcType="DOUBLE" property="payable" />
+		<result column="PAYIN" jdbcType="DOUBLE" property="payin" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		NO, SNO, BOOK_NO, TERMTIME, YEARTIME, PAYSTATUS, PAYABLE, PAYIN
+	</sql>
+	<sql id="Where_Condition">
+		<where>
+			<if test="bookname!=null">
+			  and bookname = #{bookname}
+			</if>
+			<if test="college!=null">
+			  and college = #{college}
+			</if>
+			<if test="classno!=null">
+			   and classno = #{classno}
+			</if>
+			<if test="yeartime!=null">
+			   and yeartime = #{yeartime}
+			</if>
+			<if test="termtime!=null">
+				and termtime = #{termtime}
+			</if>
+			<if test="paystatus!=null">
+				and paystatus1 = #{paystatus}
+			</if>
+		</where>
+	</sql>
+	<select id="selectBookReserveByCondition" resultType="map"
+		parameterType="org.es.service.manager.book.BookQueryCondition">
+		select *
+		from v_book_reserve
+		<include refid="Where_Condition"/>
+	</select>
+	<select id="selectByExample" parameterType="org.es.model.BookReserveExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from book_reserve
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from book_reserve
+		where NO = #{no,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from book_reserve
+		where NO = #{no,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="org.es.model.BookReserveExample">
+		delete from book_reserve
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="org.es.model.BookReserve">
+		insert into book_reserve (NO, SNO, BOOK_NO,
+		TERMTIME, YEARTIME, PAYSTATUS,
+		PAYABLE, PAYIN)
+		values (#{no,jdbcType=INTEGER}, #{sno,jdbcType=VARCHAR},
+		#{bookNo,jdbcType=INTEGER},
+		#{termtime,jdbcType=INTEGER}, #{yeartime,jdbcType=VARCHAR}, #{paystatus,jdbcType=INTEGER},
+		#{payable,jdbcType=DOUBLE}, #{payin,jdbcType=DOUBLE})
+	</insert>
+	<insert id="insertSelective" parameterType="org.es.model.BookReserve">
+		insert into book_reserve
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="no != null">
+				NO,
+			</if>
+			<if test="sno != null">
+				SNO,
+			</if>
+			<if test="bookNo != null">
+				BOOK_NO,
+			</if>
+			<if test="termtime != null">
+				TERMTIME,
+			</if>
+			<if test="yeartime != null">
+				YEARTIME,
+			</if>
+			<if test="paystatus != null">
+				PAYSTATUS,
+			</if>
+			<if test="payable != null">
+				PAYABLE,
+			</if>
+			<if test="payin != null">
+				PAYIN,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="no != null">
+				#{no,jdbcType=INTEGER},
+			</if>
+			<if test="sno != null">
+				#{sno,jdbcType=VARCHAR},
+			</if>
+			<if test="bookNo != null">
+				#{bookNo,jdbcType=INTEGER},
+			</if>
+			<if test="termtime != null">
+				#{termtime,jdbcType=INTEGER},
+			</if>
+			<if test="yeartime != null">
+				#{yeartime,jdbcType=VARCHAR},
+			</if>
+			<if test="paystatus != null">
+				#{paystatus,jdbcType=INTEGER},
+			</if>
+			<if test="payable != null">
+				#{payable,jdbcType=DOUBLE},
+			</if>
+			<if test="payin != null">
+				#{payin,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="org.es.model.BookReserveExample"
+		resultType="java.lang.Long">
+		select count(*) from book_reserve
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update book_reserve
+		<set>
+			<if test="record.no != null">
+				NO = #{record.no,jdbcType=INTEGER},
+			</if>
+			<if test="record.sno != null">
+				SNO = #{record.sno,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bookNo != null">
+				BOOK_NO = #{record.bookNo,jdbcType=INTEGER},
+			</if>
+			<if test="record.termtime != null">
+				TERMTIME = #{record.termtime,jdbcType=INTEGER},
+			</if>
+			<if test="record.yeartime != null">
+				YEARTIME = #{record.yeartime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paystatus != null">
+				PAYSTATUS = #{record.paystatus,jdbcType=INTEGER},
+			</if>
+			<if test="record.payable != null">
+				PAYABLE = #{record.payable,jdbcType=DOUBLE},
+			</if>
+			<if test="record.payin != null">
+				PAYIN = #{record.payin,jdbcType=DOUBLE},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update book_reserve
+		set NO = #{record.no,jdbcType=INTEGER},
+		SNO = #{record.sno,jdbcType=VARCHAR},
+		BOOK_NO = #{record.bookNo,jdbcType=INTEGER},
+		TERMTIME = #{record.termtime,jdbcType=INTEGER},
+		YEARTIME = #{record.yeartime,jdbcType=VARCHAR},
+		PAYSTATUS = #{record.paystatus,jdbcType=INTEGER},
+		PAYABLE = #{record.payable,jdbcType=DOUBLE},
+		PAYIN = #{record.payin,jdbcType=DOUBLE}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="org.es.model.BookReserve">
+		update book_reserve
+		<set>
+			<if test="sno != null">
+				SNO = #{sno,jdbcType=VARCHAR},
+			</if>
+			<if test="bookNo != null">
+				BOOK_NO = #{bookNo,jdbcType=INTEGER},
+			</if>
+			<if test="termtime != null">
+				TERMTIME = #{termtime,jdbcType=INTEGER},
+			</if>
+			<if test="yeartime != null">
+				YEARTIME = #{yeartime,jdbcType=VARCHAR},
+			</if>
+			<if test="paystatus != null">
+				PAYSTATUS = #{paystatus,jdbcType=INTEGER},
+			</if>
+			<if test="payable != null">
+				PAYABLE = #{payable,jdbcType=DOUBLE},
+			</if>
+			<if test="payin != null">
+				PAYIN = #{payin,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where NO = #{no,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="org.es.model.BookReserve">
+		update book_reserve
+		set SNO = #{sno,jdbcType=VARCHAR},
+		BOOK_NO = #{bookNo,jdbcType=INTEGER},
+		TERMTIME = #{termtime,jdbcType=INTEGER},
+		YEARTIME = #{yeartime,jdbcType=VARCHAR},
+		PAYSTATUS = #{paystatus,jdbcType=INTEGER},
+		PAYABLE = #{payable,jdbcType=DOUBLE},
+		PAYIN = #{payin,jdbcType=DOUBLE}
+		where NO = #{no,jdbcType=INTEGER}
+	</update>
+</mapper>

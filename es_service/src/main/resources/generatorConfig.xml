@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="testTables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/edusys" 
+			userId="root"
+			password="123456">
+		</jdbcConnection>
+		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
+			userId="yycg"
+			password="yycg">
+		</jdbcConnection> -->
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="org.es.model"
+			targetProject=".\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="/mapper" 
+			targetProject=".\src\main\resources">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="org.es.dao" 
+			targetProject=".\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		<!-- 有些表的字段需要指定java类型-->
+		<table tableName="COURSE"></table>
+	<!-- 	<table schema="" tableName="admin_people">             </table>
+		<table schema="" tableName="degree">                   </table>
+		<table schema="" tableName="teacher">                  </table>
+		<table schema="" tableName="work_expre">               </table>
+		<table schema="" tableName="worker_award">             </table>
+		<table tableName="worker"></table>
+		<table schema="" tableName="admin_office">             </table>
+		<table schema="" tableName="authority">                </table>
+		<table schema="" tableName="book_pay_info">            </table>
+		<table schema="" tableName="book">                     </table>
+		<table schema="" tableName="book_order">               </table>
+		<table schema="" tableName="book_reserve">             </table>
+		<table schema="" tableName="classes">                    </table>
+		<table schema="" tableName="class_room">               </table>
+		<table schema="" tableName="college">                  </table>
+		<table schema="" tableName="course">                   </table>
+		<table schema="" tableName="course_book">              </table>
+		<table schema="" tableName="course_schedule_condi">    </table>
+		<table schema="" tableName="course_select_info">       </table>
+		<table schema="" tableName="course_type">              </table>
+		
+		<table schema="" tableName="exam_arrangement">         </table>
+		<table schema="" tableName="exam_status">              </table>
+		<table schema="" tableName="invigilate">               </table>
+		<table schema="" tableName="record_info">              </table>
+		<table schema="" tableName="role">                     </table>
+		<table schema="" tableName="role_autho">               </table>
+		<table schema="" tableName="schedule">                 </table>
+		<table schema="" tableName="score_info">               </table>
+		<table schema="" tableName="specialty">                </table> -->
+		<!-- <table schema="" tableName="student">                  </table> -->
+<!-- 		
+		<table schema="" tableName="user_role">                </table>
+		
+		<table schema="" tableName="login_user">             </table> -->
+		<!-- <table schema="" tableName="role"></table>
+		<table schema="" tableName="permission"></table> -->
+	</context>
+</generatorConfiguration>

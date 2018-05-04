@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.AdminOfficeMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.AdminOffice">
+    <id column="OFFICE_NO" jdbcType="VARCHAR" property="officeNo" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DES" jdbcType="VARCHAR" property="des" />
+    <result column="BUILDTIME" jdbcType="TIMESTAMP" property="buildtime" />
+    <result column="LEADER_NO" jdbcType="VARCHAR" property="leaderNo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    OFFICE_NO, NAME, DES, BUILDTIME, LEADER_NO
+  </sql>
+  <select id="selectByExample" parameterType="org.es.model.AdminOfficeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin_office
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin_office
+    where OFFICE_NO = #{officeNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from admin_office
+    where OFFICE_NO = #{officeNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.AdminOfficeExample">
+    delete from admin_office
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.AdminOffice">
+    insert into admin_office (OFFICE_NO, NAME, DES, 
+      BUILDTIME, LEADER_NO)
+    values (#{officeNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, 
+      #{buildtime,jdbcType=TIMESTAMP}, #{leaderNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.AdminOffice">
+    insert into admin_office
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="officeNo != null">
+        OFFICE_NO,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="des != null">
+        DES,
+      </if>
+      <if test="buildtime != null">
+        BUILDTIME,
+      </if>
+      <if test="leaderNo != null">
+        LEADER_NO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="officeNo != null">
+        #{officeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        #{buildtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaderNo != null">
+        #{leaderNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.AdminOfficeExample" resultType="java.lang.Long">
+    select count(*) from admin_office
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update admin_office
+    <set>
+      <if test="record.officeNo != null">
+        OFFICE_NO = #{record.officeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.des != null">
+        DES = #{record.des,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buildtime != null">
+        BUILDTIME = #{record.buildtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaderNo != null">
+        LEADER_NO = #{record.leaderNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update admin_office
+    set OFFICE_NO = #{record.officeNo,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      DES = #{record.des,jdbcType=VARCHAR},
+      BUILDTIME = #{record.buildtime,jdbcType=TIMESTAMP},
+      LEADER_NO = #{record.leaderNo,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.AdminOffice">
+    update admin_office
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        DES = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="buildtime != null">
+        BUILDTIME = #{buildtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaderNo != null">
+        LEADER_NO = #{leaderNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OFFICE_NO = #{officeNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.AdminOffice">
+    update admin_office
+    set NAME = #{name,jdbcType=VARCHAR},
+      DES = #{des,jdbcType=VARCHAR},
+      BUILDTIME = #{buildtime,jdbcType=TIMESTAMP},
+      LEADER_NO = #{leaderNo,jdbcType=VARCHAR}
+    where OFFICE_NO = #{officeNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

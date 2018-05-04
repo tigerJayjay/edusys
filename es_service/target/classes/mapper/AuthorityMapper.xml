@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.es.dao.AuthorityMapper">
+  <resultMap id="BaseResultMap" type="org.es.model.Authority">
+    <id column="AUTH_NO" jdbcType="INTEGER" property="authNo" />
+    <result column="AUTH_NAME" jdbcType="VARCHAR" property="authName" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    AUTH_NO, AUTH_NAME, URL
+  </sql>
+  <select id="selectByExample" parameterType="org.es.model.AuthorityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from authority
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from authority
+    where AUTH_NO = #{authNo,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from authority
+    where AUTH_NO = #{authNo,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.es.model.AuthorityExample">
+    delete from authority
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.es.model.Authority">
+    insert into authority (AUTH_NO, AUTH_NAME, URL
+      )
+    values (#{authNo,jdbcType=INTEGER}, #{authName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.es.model.Authority">
+    insert into authority
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authNo != null">
+        AUTH_NO,
+      </if>
+      <if test="authName != null">
+        AUTH_NAME,
+      </if>
+      <if test="url != null">
+        URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authNo != null">
+        #{authNo,jdbcType=INTEGER},
+      </if>
+      <if test="authName != null">
+        #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.es.model.AuthorityExample" resultType="java.lang.Long">
+    select count(*) from authority
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update authority
+    <set>
+      <if test="record.authNo != null">
+        AUTH_NO = #{record.authNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.authName != null">
+        AUTH_NAME = #{record.authName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null">
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update authority
+    set AUTH_NO = #{record.authNo,jdbcType=INTEGER},
+      AUTH_NAME = #{record.authName,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.es.model.Authority">
+    update authority
+    <set>
+      <if test="authName != null">
+        AUTH_NAME = #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AUTH_NO = #{authNo,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.es.model.Authority">
+    update authority
+    set AUTH_NAME = #{authName,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR}
+    where AUTH_NO = #{authNo,jdbcType=INTEGER}
+  </update>
+</mapper>

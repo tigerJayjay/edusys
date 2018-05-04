@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>课表查询</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/student-main.css">
+  <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/student-main.js"></script>
+</head>
+<body>
+<div class="page .container-fluid">
+<div class="top">
+  
+</div>
+<nav class="navbar navbar-default">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">首页</a></li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">网上选课<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">学生选课</a></li>
+            <li><a href="#">体育课</a></li>
+            <li><a href="#">全校公共选修课</a></li>
+          </ul>
+      </li>
+       <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动报名<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">双学位报名</a></li>
+            <li><a href="#">四六级报名</a></li>
+          </ul>
+      </li>
+       <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">教学质量评价<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"></a></li>
+          </ul>
+      </li>
+         <li> 
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">信息修改 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">修改密码</a></li>
+            <li><a href="#">个人信息</a></li>
+          </ul>
+        </li>
+        <li >
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">信息查询 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">成绩查询</a></li>
+            <li><a href="#">课表查询</a></li>
+            <li><a href="#">考试安排查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">重修查询</a></li>
+            <li><a href="#">补考查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">四六级查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">转专业申请</a></li>
+            <li><a href="#">选课查询</a></li>
+          </ul>
+        </li>
+      </ul>
+     <p class="navbar-text navbar-right"><a href="#" class="navbar-link">退出</a></p>
+     <p class="navbar-text navbar-right">欢迎您！xx同学</p>
+    </div><!-- /.navbar-collapse -->
+</nav>
+    
+  <div class="content">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+         选择学期:
+           <select id="u4710_input">
+            <option value="2014-2015-1">2014-2015</option>
+            <option value="2015-2016-1">2015-2016</option>
+            <option value="2016-2017-1">2016-2017</option>
+            <option value="2017-2018-1">2017-2018</option>
+          </select>
+          学年&nbsp;&nbsp;第
+          <select>
+             <option>1</option>
+             <option>2</option>
+          </select>
+          学期
+          <button type="submit" class="btn btn-default btn-sm">查找</button>
+      </div>
+      <div class="panel-body">
+              <table id="table1" class="table table-bordered" bordercolor="Black" border="0" width="100%">
+  <tr>
+    <td colspan="2" rowspan="1" width="2%">时间</td><td align="Center" width="14%">星期一</td><td align="Center" width="14%">星期二</td><td align="Center" width="14%">星期三</td><td align="Center" width="14%">星期四</td><td align="Center" width="14%">星期五</td><td class="noprint" align="Center" width="14%">星期六</td><td class="noprint" align="Center" width="14%">星期日</td>
+  </tr><tr>
+    <td colspan="2">早晨</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td rowspan="4" width="1%">上午</td><td width="1%">第1节</td><td align="Center" width="7%">&nbsp;</td><td align="Center" width="7%">&nbsp;</td><td align="Center" width="7%">&nbsp;</td><td align="Center" width="7%">&nbsp;</td><td align="Center" width="7%">&nbsp;</td><td class="noprint" align="Center" width="7%">&nbsp;</td><td class="noprint" align="Center" width="7%">&nbsp;</td>
+  </tr><tr>
+    <td>第2节</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td>第3节</td><td align="Center" rowspan="2">软件工程<br>必修<br>周一第3,4节{第1-10周}<br>傅尔胜<br>01C401</td><td align="Center">&nbsp;</td><td align="Center" rowspan="2">软件工程<br>必修<br>周三第3,4节{第1-10周}<br>傅尔胜<br>01C401</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td>第4节</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td rowspan="4" width="1%">下午</td><td>第5节</td><td align="Center">&nbsp;</td><td align="Center" rowspan="2">算法分析与设计<br>必修<br>周二第5,6节{第1-10周}<br>刘宁<br>05B301<br>第12周周5(2017-11-17) 14:30-16:30<br>05C101(高性能)</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center" rowspan="2">算法分析与设计<br>必修<br>周五第5,6节{第1-10周}<br>刘宁<br>05B301<br>第12周周5(2017-11-17) 14:30-16:30<br>05C101(高性能)</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td>第6节</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td>第7节</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td>第8节</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td rowspan="2" width="1%">晚上</td><td>第9节</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr><tr>
+    <td>第10节</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td><td class="noprint" align="Center">&nbsp;</td>
+  </tr>
+</table>
+            <br>
+            
+            
+            <div class="noprint" align="left">调、停（补）课信息：</div>
+            <table class="table table-bordered" cellspacing="0" cellpadding="3" border="0" id="DBGrid" width="100%">
+  <tr class="datelisthead">
+    <td>编号</td><td>课程名称</td><td>原上课时间地点教师</td><td>现上课时间地点教师</td><td>申请时间</td>
+  </tr>
+</table>
+            <table class="table table-bordered" id="table3" width="100%">
+              <TR>
+                <TD align="left">实践课(或无上课时间)信息：</TD>
+              </TR>
+              <TR>
+                <TD valign="top"><table class="datelist" cellspacing="0" cellpadding="3" border="0" id="DataGrid1" width="100%">
+  <tr class="datelisthead">
+    <td>课程名称</td><td>教师</td><td>学分</td><td>起止周</td><td>上课时间</td><td>上课地点</td>
+  </tr><tr>
+    <td>专业综合设计</td><td>宋涛</td><td>3.0</td><td>01-20</td><td>&nbsp;</td><td>&nbsp;</td>
+  </tr>
+</table></TD>
+              </TR>
+              <TR>
+                <TD align="left">实习课信息：</TD>
+              </TR>
+              <TR>
+                <TD><table class="datelist" cellspacing="0" cellpadding="3" border="0" id="DBGridYxkc" width="100%">
+  <tr class="datelisthead">
+    <td>学年</td><td>学期</td><td>课程名称</td><td>实习时间</td><td>模块代号</td><td>先修模块</td><td>实习编号</td>
+  </tr>
+</table></TD>
+              </TR>
+              <TR>
+                <TD align="left">未安排上课时间的课程：</TD>
+              </TR>
+              <TR>
+                <TD><table class="datelist" cellspacing="0" cellpadding="3" border="0" id="Datagrid2" width="100%">
+  <tr class="datelisthead">
+    <td>学年</td><td>学期</td><td>课程名称</td><td>教师姓名</td><td>学分</td>
+  </tr><tr>
+    <td>2017-2018</td><td>1</td><td>专业综合设计</td><td>宋涛</td><td>3.0</td>
+  </tr>
+</table>
+      </div>
+    </div>
+    
+  </div>
+  <div class="footer"></div>
+</div>
+</body>
+</html>

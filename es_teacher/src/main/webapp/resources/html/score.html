@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>成绩查询</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/student-main.css">
+	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/student-main.js"></script>
+</head>
+<body>
+<div class="page .container-fluid">
+<div class="top">
+	
+</div>
+<nav class="navbar navbar-default">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<li class="active"><a href="#">首页</a></li>
+        <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">网上选课<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">学生选课</a></li>
+            <li><a href="#">体育课</a></li>
+            <li><a href="#">全校公共选修课</a></li>
+          </ul>
+      </li>
+       <li>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">活动报名<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">双学位报名</a></li>
+            <li><a href="#">四六级报名</a></li>
+          </ul>
+      </li>
+       <li>
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">教学质量评价<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"></a></li>
+          </ul>
+      </li>
+         <li> 
+         	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">信息修改 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">修改密码</a></li>
+            <li><a href="#">个人信息</a></li>
+          </ul>
+        </li>
+        <li >
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">信息查询 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">成绩查询</a></li>
+            <li><a href="#">课表查询</a></li>
+            <li><a href="#">考试安排查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">重修查询</a></li>
+            <li><a href="#">补考查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">四六级查询</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">转专业申请</a></li>
+            <li><a href="#">选课查询</a></li>
+          </ul>
+        </li>
+      </ul>
+     <p class="navbar-text navbar-right"><a href="#" class="navbar-link">退出</a></p>
+     <p class="navbar-text navbar-right">欢迎您！xx同学</p>
+    </div><!-- /.navbar-collapse -->
+</nav>
+		
+	<div class="content">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+     <form  role="search">
+         <select>
+         	<option selected>2014-2015</option>
+         	<option>2015-2016</option>
+         	<option>2016-2017</option>
+         	<option>2017-2018</option>
+         </select>
+         学年&nbsp;&nbsp;第
+         <select>
+         	<option selected>1</option>
+         	<option>2</option>
+         </select>
+         学期&nbsp;&nbsp;课程类别
+         <select>
+         	<option selected>全部</option>
+         	<option>必修课</option>
+         	<option>全校公选课</option>
+         	<option>实践课</option>
+         	<option>拓展选修课</option>
+         </select>
+      <button type="submit" class="btn btn-default btn-sm">查找</button>
+    </form>
+      </div>
+      <div class="panel-body">
+   <table class="table table-bordered table-condensed" cellspacing="0" cellpadding="3" border="0" id="DataGrid1" width="100%">
+	<tr class="datelisthead">
+		<td>课程代码</td><td>课程名称</td><td>课程性质</td><td>期末成绩</td><td>成绩</td><td>课程归属</td><td>补考成绩</td><td>重修成绩</td><td>学分</td><td>辅修标记</td>
+	</tr><tr>
+		<td>507090</td><td>大学英语读写译(一)</td><td>必修课</td><td>62</td><td>71</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>521003</td><td>体育(一)</td><td>必修课</td><td>&nbsp;</td><td>95</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>507094</td><td>大学英语视听说(一)</td><td>必修课</td><td>61</td><td>70</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>512001</td><td>思想品德修养与法律基础</td><td>必修课</td><td>73</td><td>79</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.0</td><td>0</td>
+	</tr><tr>
+		<td>510118</td><td>计算机应用导论</td><td>必修课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>511001</td><td>高等数学Ⅰ(一)</td><td>必修课</td><td>25</td><td>32</td><td>&nbsp;</td><td>60</td><td>&nbsp;</td><td>4.5</td><td>0</td>
+	</tr><tr>
+		<td>510239</td><td>计算机应用导论实验</td><td>实践课</td><td>优秀</td><td>优秀</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>521001</td><td>军事训练</td><td>实践课</td><td>&nbsp;</td><td>优秀</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr>
+		<td>507091</td><td>大学英语读写译(二)</td><td>必修课</td><td>66.5</td><td>72</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>507095</td><td>大学英语视听说(二)</td><td>必修课</td><td>71</td><td>76</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr>
+		<td>512005</td><td>中国近现代史纲要</td><td>必修课</td><td>90</td><td>92</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>511002</td><td>高等数学Ⅰ(二)</td><td>必修课</td><td>44</td><td>50</td><td>&nbsp;</td><td>60</td><td>&nbsp;</td><td>6.0</td><td>0</td>
+	</tr><tr>
+		<td>510125</td><td>计算机科学导论</td><td>必修课</td><td>88</td><td>89</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510003</td><td>高级语言程序设计</td><td>必修课</td><td>85</td><td>87</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>5.5</td><td>0</td>
+	</tr><tr>
+		<td>521004</td><td>体育(二)</td><td>必修课</td><td>&nbsp;</td><td>90</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>&nbsp;</td>
+	</tr><tr class="alt">
+		<td>513001</td><td>电工电子技术基础I</td><td>必修课</td><td>59</td><td>67</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>5.0</td><td>0</td>
+	</tr><tr>
+		<td>500632</td><td>团体操</td><td>全校公选课</td><td>&nbsp;</td><td>优秀</td><td>技术技能类</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>500202</td><td>程序设计概论</td><td>全校公选课</td><td>&nbsp;</td><td>优秀</td><td>自然科学类</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>510240</td><td>高级语言程序设计课程设计</td><td>实践课</td><td>优秀</td><td>优秀</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510223</td><td>认识实习</td><td>实践课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>514048</td><td>美术欣赏</td><td>拓展选修课</td><td>90</td><td>90</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510001</td><td>数据结构</td><td>必修课</td><td>91.5</td><td>93</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>5.0</td><td>0</td>
+	</tr><tr>
+		<td>507092</td><td>大学英语读写译(三)</td><td>必修课</td><td>68.5</td><td>75</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>521005</td><td>体育(三)</td><td>必修课</td><td>&nbsp;</td><td>90</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>&nbsp;</td>
+	</tr><tr>
+		<td>512002</td><td>马克思主义基本原理概论</td><td>必修课</td><td>66</td><td>70</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>511006</td><td>线性代数</td><td>必修课</td><td>62</td><td>67</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.5</td><td>0</td>
+	</tr><tr>
+		<td>510035</td><td>数字逻辑</td><td>必修课</td><td>89</td><td>91</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>507096</td><td>大学英语视听说(三)</td><td>必修课</td><td>64</td><td>73</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr>
+		<td>511017</td><td>离散数学</td><td>必修课</td><td>93</td><td>94</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>500083</td><td>媒体文化</td><td>全校公选课</td><td>83</td><td>83</td><td>人文社科类</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>ZT0143</td><td>明史十讲</td><td>全校公选课</td><td>&nbsp;</td><td>95.9</td><td>人文社科类</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>&nbsp;</td>
+	</tr><tr class="alt">
+		<td>510203</td><td>数据结构课程设计</td><td>实践课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>514049</td><td>音乐鉴赏</td><td>拓展选修课</td><td>85</td><td>85</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510004</td><td>数据库原理</td><td>必修课</td><td>84</td><td>84</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.0</td><td>0</td>
+	</tr><tr>
+		<td>510159</td><td>计算机网络原理</td><td>必修课</td><td>83</td><td>84</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510097</td><td>面向对象技术</td><td>必修课</td><td>74</td><td>74</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.0</td><td>0</td>
+	</tr><tr>
+		<td>507093</td><td>大学英语读写译(四)</td><td>必修课</td><td>68</td><td>75</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>507097</td><td>大学英语视听说(四)</td><td>必修课</td><td>68</td><td>75</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.5</td><td>0</td>
+	</tr><tr>
+		<td>511005</td><td>概率论与数理统计</td><td>必修课</td><td>67</td><td>70</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>512006</td><td>毛泽东思想和中国特色社会主义理论体系概论</td><td>必修课</td><td>75</td><td>83</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>6.0</td><td>0</td>
+	</tr><tr>
+		<td>521006</td><td>体育(四)</td><td>必修课</td><td>&nbsp;</td><td>79</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>&nbsp;</td>
+	</tr><tr class="alt">
+		<td>ZT0123</td><td>大学生爱情兵法</td><td>全校公选课</td><td>&nbsp;</td><td>91.39</td><td>人文社科类</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>&nbsp;</td>
+	</tr><tr>
+		<td>510210</td><td>专业实习</td><td>实践课</td><td>&nbsp;</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510241</td><td>计算机网络原理实验</td><td>实践课</td><td>&nbsp;</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>510232</td><td>面向对象技术课程设计</td><td>实践课</td><td>中等</td><td>中等</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510158</td><td>计算机组成原理</td><td>必修课</td><td>92</td><td>92</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.5</td><td>0</td>
+	</tr><tr>
+		<td>510099</td><td>大型数据库设计</td><td>必修课</td><td>79</td><td>81</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510075</td><td>网站规划与设计</td><td>必修课</td><td>&nbsp;</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.0</td><td>0</td>
+	</tr><tr>
+		<td>510026</td><td>Linux应用</td><td>选修课</td><td>89</td><td>87</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510127</td><td>Java程序设计</td><td>选修课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.0</td><td>0</td>
+	</tr><tr>
+		<td>510132</td><td>平面图像处理</td><td>选修课</td><td>88</td><td>90</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510233</td><td>大型数据库课程设计</td><td>实践课</td><td>&nbsp;</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>510243</td><td>网站规划与设计课程设计</td><td>实践课</td><td>&nbsp;</td><td>中等</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510242</td><td>计算机组成原理实验</td><td>实践课</td><td>&nbsp;</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr><tr>
+		<td>510005</td><td>操作系统原理</td><td>必修课</td><td>69</td><td>71</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510128</td><td>Java web开发(案例)</td><td>选修课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.5</td><td>0</td>
+	</tr><tr>
+		<td>510130</td><td>Android应用开发</td><td>选修课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.5</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510134</td><td>数字视频编辑</td><td>选修课</td><td>74</td><td>76</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>3.0</td><td>0</td>
+	</tr><tr>
+		<td>510133</td><td>二维动画设计(案例)</td><td>选修课</td><td>82</td><td>83</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>4.0</td><td>0</td>
+	</tr><tr class="alt">
+		<td>510237</td><td>专业实训</td><td>实践课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>2.0</td><td>0</td>
+	</tr><tr>
+		<td>510234</td><td>操作系统原理课程设计</td><td>实践课</td><td>良好</td><td>良好</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>1.0</td><td>0</td>
+	</tr>
+	<tr>
+		<td>统计</td><td></td><td></td><td></td><td></td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>333.0</td><td></td>
+	</tr>
+	</table>
+	<br>
+	<div align="left"></div>
+	<div align="left">
+	<span id="Label10"><b>至今未通过的课程信息：</b></span>
+	<table class="table" cellspacing="0" cellpadding="3" border="0" id="Datagrid3" width="100%">
+		<tr class="datelisthead">
+			<td>课程代码</td><td>课程名称</td><td>课程性质</td><td>最高成绩值</td>
+		</tr>
+	</table>
+	</div>
+</div>
+    
+</div>
+	<div class="footer"></div>
+</div>
+</body>
+</html>

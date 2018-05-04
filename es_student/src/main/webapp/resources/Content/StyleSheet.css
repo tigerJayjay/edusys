@@ -1,0 +1,144 @@
+
+body
+{
+    font-size: 12px;
+    font-family: Î¢ÈíÑÅºÚ,ËÎÌå;
+    margin: 0;
+    padding: 0;
+}
+h2
+{
+    padding-left: 5px;
+}
+.submitcss
+{
+    background: url(../images/buttonOn_login.gif) left top no-repeat;
+    height: 21px;
+    width: 109px;
+    text-align: center;
+    border: 0px;
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    font-size: 14px;
+}
+.mbx
+{
+    height: 23px;
+    font-weight: bold;
+    color: #9b6835;
+    border-bottom: 1px #999 dotted;
+    padding: 12px 19px 3px 19px;
+    margin: 4px;
+    background: url(../images/direction.gif) 0 center no-repeat;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+
+.editor-label
+{
+    width: 115px;
+	margin-right:5px;
+    height: 35px;
+    float: left;
+	text-align:right;
+	
+}
+.editor-field
+{
+    width: 282px;
+    height: 35px;
+    float: left;
+}
+.bigdiv
+{
+    width: 100%;
+}
+.icon-excel {
+    background: url('../Images/excelcss.jpg') no-repeat;
+}
+.text-box
+{
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    height: 21px;
+    width: 210px;
+    border: 1px solid #CCC;
+}
+.textarea-box
+{
+    margin-bottom: 10px;
+}
+.anUnderLine
+{
+    text-decoration: underline;
+}
+/* ²éÑ¯ 
+----------------------------------------------------------*/
+#divQuery
+{
+    padding: 5px 0px 0px 5px;
+    width: 810px;
+}
+.editor-field-Search
+{
+    width: 282px;
+    height: 53px;
+    float: left;
+}
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+fieldset
+{
+    width: 810px;
+    margin-left: 4px;
+    padding: 1em;
+    border: 1px solid #CCC;
+}
+
+legend
+{
+    padding: 2px 4px 8px 4px;
+}
+fieldset  input[type="password"]
+{
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    height: 21px;
+    width: 210px;
+    border: 1px solid #CCC;
+}
+
+fieldset textarea
+{
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    height: 106px;
+    width: 610px;
+    border: 1px solid #CCC;
+}
+fieldset select
+{
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    height: 26px;
+    width: 214px;
+    border: 1px solid #CCC;
+}
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+fieldset .field-validation-error
+{
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    color: #ff0000;
+}
+
+fieldset .field-validation-valid
+{
+    font-size: 16px;
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    display: none;
+}
+
+fieldset .input-validation-error
+{
+    font-family: Î¢ÈíÑÅºÚ,ĞÂËÎÌå;
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
